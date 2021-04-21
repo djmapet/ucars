@@ -37,4 +37,4 @@ class CarModelTests(TestCase):
         car.save()
 
         self.assertEqual(car.color, 0)
-        self.assertEqual(car.get_color_display(), 'Unkown')
+        self.assertEqual(car.get_color(), 'Unkown')
