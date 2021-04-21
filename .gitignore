@@ -130,3 +130,5 @@ dmypy.json
 
 
 local_settings.py
+# pycharm settings
+.idea/
