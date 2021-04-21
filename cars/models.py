@@ -21,7 +21,6 @@ class CarModel(models.Model):
 class Car(models.Model):
     carmodel = models.ForeignKey(CarModel,on_delete=models.CASCADE)
 
-    #class Color(models.IntegerChoices):
     UNKNOWN = 0
     WHITE = 1
     BLACK = 2
@@ -36,4 +35,7 @@ class Car(models.Model):
         (YELLOW, 'Yellow')
     ]
 
-    color = models.IntegerField(choices=COLOR_CHOICES, default=0, null=False)
+    color = models.IntegerField(choices=COLOR_CHOICES, default=UNKNOWN, null=False)
+
+    def get_color(self):
+        return  self.get_color_display()
