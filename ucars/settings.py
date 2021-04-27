@@ -122,4 +122,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-SECRET_KEY = '&kb*susedseag@34fnim@z3fm3nn=l9fj2!w$deb-8$47(-v+g'
