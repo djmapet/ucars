@@ -95,3 +95,4 @@ class Car(models.Model):
 
 class Image(models.Model):
     car = models.ForeignKey(Car,on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='images/')
