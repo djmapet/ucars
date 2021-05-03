@@ -45,6 +45,7 @@ class Car(models.Model):
     BLACK = 2
     RED = 3
     YELLOW = 4
+    SILVER = 5
 
     COLOR_CHOICES = [
         (COLOR_UNKNOWN, 'Unkown'),
@@ -52,6 +53,7 @@ class Car(models.Model):
         (BLACK, 'Black'),
         (RED, 'Red'),
         (YELLOW, 'Yellow')
+        (SILVER, 'Silver')
     ]
 
     color = models.IntegerField(choices=COLOR_CHOICES, default=COLOR_UNKNOWN, null=False)
@@ -84,6 +86,7 @@ class Car(models.Model):
     (DRIVE_MR,'ミッドシップ'),
     ]
     drive = models.IntegerField('駆動方式',choices=DRIVE_CHOICES, default=DRIVE_UNKNOWN, null=False)
+    additonal = models.CharField('追加事項',max_length=100,)#例：修復歴有り、走行距離不明、ETC取り付け済み
 
     odometer = models.CharField('走行距離',max_length=7,)
     car_inspection_year = models.CharField('車検最終年',max_length=4,)
