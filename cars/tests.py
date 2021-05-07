@@ -3,6 +3,7 @@ from django.test import TestCase
 # Create your tests here.
 
 from cars.models import Manufacturer, CarModel, Car, Shop
+from django.core.exceptions import ValidationError
 
 
 def create_maker():
@@ -53,6 +54,31 @@ class ShopTests(TestCase):
 
         self.assertEqual(shop.pref, 13)
         self.assertEqual(shop.get_pref(), '東京')
+
+        tel_no = "+aaaa"
+        shop.tel = tel_no
+
+        with self.assertRaises(ValidationError):
+            shop.full_clean()
+
+        tel_no = "0123456789123456"
+        shop.tel = tel_no
+
+        with self.assertRaises(ValidationError):
+            shop.full_clean()
+
+        tel_no = "012345678912345"
+        shop.tel = tel_no
+        shop.full_clean()
+
+        tel_no = "03-555-6666"
+        shop.tel = tel_no
+        shop.full_clean()
+
+        shop.save()
+
+        self.assertEqual(shop.tel, tel_no)
+
 
 class CarTests(TestCase):
     def setUp(self):
