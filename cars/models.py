@@ -113,11 +113,11 @@ class Car(models.Model):
     GEAR_MT = 2
 
     GEAR_CHOICES = [
-    (GEAR_UNKNOWN,'Unknown'),
-    (GEAR_AT,'AT'),
-    (GEAR_MT,'MT'),
+        (GEAR_UNKNOWN, 'Unknown'),
+        (GEAR_AT, 'AT'),
+        (GEAR_MT, 'MT'),
     ]
-    gear = models.IntegerField('TypeOfGear',choices=GEAR_CHOICES, default=GEAR_UNKNOWN, null=False)
+    gear = models.IntegerField('TypeOfGear', choices=GEAR_CHOICES, default=GEAR_UNKNOWN, null=False)
 
     DRIVE_UNKNOWN = 0
     DRIVE_FF = 1
@@ -126,29 +126,29 @@ class Car(models.Model):
     DRIVE_MR = 4
 
     DRIVE_CHOICES = [
-    (DRIVE_UNKNOWN,'Unknown'),
-    (DRIVE_FF,'FF'),
-    (DRIVE_FR,'FR'),
-    (DRIVE_4WD,'4WD'),
-    (DRIVE_MR,'MIDSHIP'),
+        (DRIVE_UNKNOWN, 'Unknown'),
+        (DRIVE_FF, 'FF'),
+        (DRIVE_FR, 'FR'),
+        (DRIVE_4WD, '4WD'),
+        (DRIVE_MR, 'MIDSHIP'),
     ]
-    drive = models.IntegerField('TypeOfDrive',choices=DRIVE_CHOICES, default=DRIVE_UNKNOWN, null=False)
+    drive = models.IntegerField('TypeOfDrive', choices=DRIVE_CHOICES, default=DRIVE_UNKNOWN, null=False)
 
-    TYPE_SEDAN  = 1
-    TYPE_COUPE  = 2
-    TYPE_WAGON  = 3
-    TYPE_OPEN   = 4
-    TYPE_VAN    = 4
+    TYPE_SEDAN = 1
+    TYPE_COUPE = 2
+    TYPE_WAGON = 3
+    TYPE_OPEN = 4
+    TYPE_VAN = 4
     TYPE_ONEBOX = 5
-    TYPE_TRUCK  = 6
+    TYPE_TRUCK = 6
     BODY_TYPE_CHOICES = [
         (TYPE_SEDAN, 'Sedan'),
         (TYPE_COUPE, 'COUPE'),
         (TYPE_WAGON, 'Wagon'),
     ]
-    body_type = models.IntegerField('BodyType',choices=DRIVE_CHOICES, default=DRIVE_UNKNOWN, null=False)
+    body_type = models.IntegerField('BodyType', choices=DRIVE_CHOICES, default=DRIVE_UNKNOWN, null=False)
 
-    model_year = models.PositiveIntegerField('model year', null = True)
+    model_year = models.PositiveIntegerField('model year', null=True)
 
     PLATE_CATEGORY_UNKNOWN = 0
     PLATE_CATEGORY_A = 1
@@ -167,9 +167,9 @@ class Car(models.Model):
     latest_inspection_date = models.DateField('LastInspectionDate', null=True)
 
     def get_color(self):
-        return  self.get_color_display()
+        return self.get_color_display()
 
 
 class CarImage(models.Model):
-    car = models.ForeignKey(Car,on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
     picture = models.URLField()
