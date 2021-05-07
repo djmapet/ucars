@@ -85,6 +85,9 @@ class Shop(models.Model):
     def __str__(self):
         return self.name
 
+    def get_pref(self):
+        return self.get_pref_display()
+
 
 class Car(models.Model):
     carmodel = models.ForeignKey(CarModel, on_delete=models.CASCADE)
