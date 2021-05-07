@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
@@ -74,8 +75,9 @@ class Pref(models.Model):
 
 
 class Shop(models.Model):
+    tel_number_regex = RegexValidator(regex=r'^[0-9\-]+$', message="Phone number must be up to 15 digits and '-' allowed.")
     name = models.CharField('shop name', max_length=100)
-    tel = models.CharField('telephon number', max_length=15)
+    tel = models.CharField('telephon number', validators=[tel_number_regex], max_length=15)
     email = models.EmailField('email', max_length=100, null=True)
 
     pref = models.IntegerField(choices=Pref.PREF_CHOICES)
