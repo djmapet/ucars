@@ -55,6 +55,10 @@ class ShopTests(TestCase):
         self.assertEqual(shop.pref, 13)
         self.assertEqual(shop.get_pref(), '東京')
 
+    def test_telno(self):
+        shop = Shop(name="aaa", email="hoge@hoge.com", city="kawasaki", area="???", pref=1)
+        shop.save()
+
         tel_no = "+aaaa"
         shop.tel = tel_no
 
@@ -78,6 +82,33 @@ class ShopTests(TestCase):
         shop.save()
 
         self.assertEqual(shop.tel, tel_no)
+
+    def test_email(self):
+        shop = Shop(name="aaa", email="hoge@hoge.com", city="kawasaki", area="???", pref=1, tel="0901113333")
+        shop.save()
+
+        email = '@hoge.com'
+        shop.email = email
+        with self.assertRaises(ValidationError):
+            shop.full_clean()
+
+        email = 'hoge@hogecom'
+        shop.email = email
+        with self.assertRaises(ValidationError):
+            shop.full_clean()
+
+        email = 'hoge@hoge.com'
+        shop.email = email
+        shop.full_clean()
+
+        email = 'hoge-a@hoge.com'
+        shop.email = email
+        shop.full_clean()
+
+        email = 'hoge¥@hogecom'
+        shop.email = email
+        with self.assertRaises(ValidationError):
+            shop.full_clean()
 
 
 class CarTests(TestCase):
