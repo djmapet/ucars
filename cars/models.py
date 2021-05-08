@@ -172,6 +172,7 @@ class Car(models.Model):
 
     mileage = models.PositiveIntegerField('mileage', default=0)
     latest_inspection_date = models.DateField('LastInspectionDate', null=True)
+    price = models.PositiveIntegerField('price', default=0)
 
     def get_color(self):
         return self.get_color_display()
