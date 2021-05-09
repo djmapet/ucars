@@ -1,0 +1,14 @@
+[
+  {
+    "model": "cars.shop",
+    "pk": 1,
+    "fields": {
+      "name": "KANAGAWA auto",
+      "tel": "044-555-6721",
+      "email": "hoge@hoge.com",
+      "pref": 14,
+      "city": "横浜",
+      "area": "-"
+    }
+  }
+]
