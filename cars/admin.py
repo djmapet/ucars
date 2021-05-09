@@ -4,13 +4,13 @@ from django.contrib import admin
 from import_export.resources import ModelResource
 from import_export.admin import ImportMixin
 from import_export.formats import base_formats
-from .models import Manufacturer, CarModel, Car
+from .models import Manufacturer, CarModel, Car, Shop
 
 class CarResource(ModelResource):
     class Meta:
         model = Car
 
-        import_order = ('car_model', 'shop', 'color', 'gear', 'drive', 'body_type', 'model_year', 'plate_category', 'mileage', 'inspection_date', 'price')
+        import_order = ('carmodel', 'shop', 'color', 'gear', 'drive', 'body_type', 'model_year', 'plate_category', 'mileage', 'inspection_date', 'price')
         import_id_fields = ['id']
 
 
@@ -23,3 +23,4 @@ class CarAdmin(ImportMixin, admin.ModelAdmin):
 admin.site.register(Car, CarAdmin)
 admin.site.register(Manufacturer)
 admin.site.register(CarModel)
+admin.site.register(Shop)
