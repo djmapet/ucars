@@ -1,0 +1,26 @@
+[
+  {
+    "model": "cars.carmodel",
+    "pk": 1,
+    "fields": {
+      "manufacturer": 1,
+      "name": "PRIUS"
+    }
+  },
+  {
+    "model": "cars.carmodel",
+    "pk": 2,
+    "fields": {
+      "manufacturer": 1,
+      "name": "HI ACE"
+    }
+  },
+  {
+    "model": "cars.carmodel",
+    "pk": 3,
+    "fields": {
+      "manufacturer": 2,
+      "name": "SKYLINE"
+    }
+  }
+]

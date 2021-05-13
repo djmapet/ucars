@@ -149,9 +149,9 @@ class Car(models.Model):
     TYPE_ONEBOX = 5
     TYPE_TRUCK = 6
     BODY_TYPE_CHOICES = [
-        (TYPE_SEDAN, 'Sedan'),
+        (TYPE_SEDAN, 'SEDAN'),
         (TYPE_COUPE, 'COUPE'),
-        (TYPE_WAGON, 'Wagon'),
+        (TYPE_WAGON, 'WAGON'),
     ]
     body_type = models.IntegerField('BodyType', choices=DRIVE_CHOICES, default=DRIVE_UNKNOWN, null=False)
 
