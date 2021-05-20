@@ -10,11 +10,12 @@ def detail(request, car_id=1):
     try:
         car = Car.objects.get(pk=car_id)
         color = car.get_color()
-        #mileage = car.get_mileage()
+        mileage = car.mileage
     except Car.DoesNotExist:
         raise Http404("Car does not exist")
-    return HttpResponse("car id = %d" % car_id)
+
     return HttpResponse("car mileage = %d" % mileage)
+    return HttpResponse("car color = %d" % color)
 
 def testview(request):
     user = request.user
