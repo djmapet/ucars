@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from cars.models import Car
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from django.shortcuts import render
 
 # Create your views here.
 def index(request):
@@ -14,8 +15,5 @@ def detail(request, car_id=1):
     except Car.DoesNotExist:
         raise Http404("Car does not exist")
 
-    return HttpResponse("car mileage = %d" % mileage)
-    return HttpResponse("car color = %d" % color)
-
-def testview(request):
-    user = request.user
+    context = {'color': color, 'mileage': mileage}
+    return render(request, 'car_detail.html', context)
