@@ -13,7 +13,8 @@ def detail(request, car_id=1):
         car = Car.objects.get(pk=car_id)
         color = car.get_color()
         mileage = car.mileage
-        name = carmodel.self.name
+        carmodel=car.carmodel
+        name = carmodel.name
         manufacturer = carmodel.manufacturer
     except Car.DoesNotExist:
         raise Http404("Car does not exist")
