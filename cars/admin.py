@@ -6,7 +6,7 @@ from import_export.admin import ImportMixin
 from import_export.formats import base_formats
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
-from .models import Manufacturer, CarModel, Car, Shop
+from .models import Manufacturer, CarModel, Car, Shop, Pref
 
 class CarResource(ModelResource):
     id = Field(attribute='id', column_name='id')
@@ -53,8 +53,63 @@ class CarAdmin(ImportMixin, admin.ModelAdmin):
     resource_class = CarResource
     formats = [base_formats.TSV]
 
+#メーカー
+class ManufacturerResource(ModelResource):
+    id = Field(attribute='id', column_name='id')
+    name = Field(attribute='name', column_name='name')
+    class Meta:
+        model =  Manufacturer
+        import_order = ('id', 'name')
+
+class ManufacturerAdmin(ImportMixin, admin.ModelAdmin):
+    list_display = ['id', 'name']
+    resource_class = ManufacturerResource
+    formats = [base_formats.TSV]
+
+#ショップ
+class ShopResource(ModelResource):
+    id = Field(attribute='id', column_name='id')
+    name = Field(attribute='name', column_name='name')
+    tel = Field(attribute='tel', column_name='tel')
+    email = Field(attribute='email', column_name='email')
+    pref = Field(attribute='pref', column_name='pref')
+    city = Field(attribute='city', column_name='city')
+    area = Field(attribute='area', column_name='area')
+
+    class Meta:
+        model = Shop
+        import_order = ('id', 'name','tel','email','pref','city','area')
+
+    def before_import_row(self, row, row_number=None, **kwargs):
+        for n in Pref.PREF_CHOICES:
+            if n[1] == row['pref']:
+                row['pref'] = n[0]
+                break
+
+
+class ShopAdmin(ImportMixin, admin.ModelAdmin):
+    list_display = ['id', 'name']
+    resource_class = ShopResource
+    formats = [base_formats.TSV]
+
+#カーモデル
+class CarModelResource(ModelResource):
+    id = Field(attribute='id', column_name='id')
+    manufacturer = Field(attribute='manufacturer', column_name='manufacturer', widget=ForeignKeyWidget(Manufacturer, 'name'))
+    name = Field(attribute='name', column_name='name')
+
+    class Meta:
+        model =  CarModel
+        import_order = ('manufacturer', 'name')
+
+
+class CarModelAdmin(ImportMixin, admin.ModelAdmin):
+    list_display = ['name', 'manufacturer']
+    resource_class = CarModelResource
+    formats = [base_formats.TSV]
+
 
 admin.site.register(Car, CarAdmin)
-admin.site.register(Manufacturer)
-admin.site.register(CarModel)
-admin.site.register(Shop)
+admin.site.register(Manufacturer, ManufacturerAdmin)
+admin.site.register(CarModel, CarModelAdmin)
+admin.site.register(Shop, ShopAdmin)
