@@ -1,4 +1,5 @@
 from django.db import models
+from .shop import Shop
 from django.core.validators import RegexValidator
 
 # Create your models here.
@@ -20,77 +21,6 @@ class CarModel(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Pref(models.Model):
-    PREF_CHOICES = [
-        (1, '北海道'),
-        (2, '青森'),
-        (3, '岩手'),
-        (4, '宮城'),
-        (5, '秋田'),
-        (6, '山形'),
-        (7, '福島'),
-        (8, '茨城'),
-        (9, '栃木'),
-        (10, '群馬'),
-        (11, '埼玉'),
-        (12, '千葉'),
-        (13, '東京'),
-        (14, '神奈川'),
-        (15, '新潟'),
-        (16, '富山'),
-        (17, '石川'),
-        (18, '福井'),
-        (19, '山梨'),
-        (20, '長野'),
-        (21, '岐阜'),
-        (22, '静岡'),
-        (23, '愛知'),
-        (24, '三重'),
-        (25, '滋賀'),
-        (26, '京都'),
-        (27, '大阪'),
-        (28, '兵庫'),
-        (29, '奈良'),
-        (30, '和歌山'),
-        (31, '鳥取'),
-        (32, '島根'),
-        (33, '岡山'),
-        (34, '広島'),
-        (35, '山口'),
-        (36, '徳島'),
-        (37, '香川'),
-        (38, '愛媛'),
-        (39, '高知'),
-        (40, '福岡'),
-        (41, '佐賀'),
-        (42, '長崎'),
-        (43, '熊本'),
-        (44, '大分'),
-        (45, '宮崎'),
-        (46, '鹿児島'),
-        (47, '沖縄')
-    ]
-
-
-class Shop(models.Model):
-    tel_number_regex = RegexValidator(regex=r'^[0-9\-]+$', message="Phone number must be up to 15 digits and '-' allowed.")
-    email_regex = RegexValidator(regex=r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", message="bad email format.")
-
-    name = models.CharField('shop name', max_length=100)
-    tel = models.CharField('telephon number', validators=[tel_number_regex], max_length=15)
-    email = models.EmailField('email', validators=[email_regex], max_length=100, null=True)
-
-    pref = models.IntegerField(choices=Pref.PREF_CHOICES)
-    city = models.CharField('City', max_length=20)
-    area = models.CharField('Area', max_length=20)
-
-    def __str__(self):
-        return self.name
-
-    def get_pref(self):
-        return self.get_pref_display()
 
 
 class Car(models.Model):
