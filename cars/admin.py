@@ -6,7 +6,7 @@ from import_export.admin import ImportMixin
 from import_export.formats import base_formats
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
-from .models import Manufacturer, CarModel, Car, Shop
+from .models import Manufacturer, CarModel, Car, Shop, Pref
 
 class CarResource(ModelResource):
     id = Field(attribute='id', column_name='id')
@@ -51,26 +51,20 @@ class CarResource(ModelResource):
 class CarAdmin(ImportMixin, admin.ModelAdmin):
     list_display = ['id', 'shop']
     resource_class = CarResource
-    formats = [base_formats.CSV]
+    formats = [base_formats.TSV]
 
 #メーカー
 class ManufacturerResource(ModelResource):
     id = Field(attribute='id', column_name='id')
-    manufacturer = Field(attribute='manufacturer', column_name='manufacturer')
+    name = Field(attribute='name', column_name='name')
     class Meta:
         model =  Manufacturer
-        import_order = ('manufacturer')
-
-    def before_import_row(self, row, row_number=None, **kwargs):
-        for n in Manufacturer.MANUFACTURER_CHOICES:
-            if n[1] == row['manufacturer']:
-                row['manufacturer'] = n[0]
-                break
+        import_order = ('id', 'name')
 
 class ManufacturerAdmin(ImportMixin, admin.ModelAdmin):
-    list_display = ['id', 'manufacturer']
+    list_display = ['id', 'name']
     resource_class = ManufacturerResource
-    formats = [base_formats.CSV]
+    formats = [base_formats.TSV]
 
 #ショップ
 class ShopResource(ModelResource):
@@ -83,43 +77,39 @@ class ShopResource(ModelResource):
     area = Field(attribute='area', column_name='area')
 
     class Meta:
-        model =  Shop
-        import_order = ('name','tel','email','pref','city','area')
+        model = Shop
+        import_order = ('id', 'name','tel','email','pref','city','area')
 
     def before_import_row(self, row, row_number=None, **kwargs):
-        for n in Shop.NAME_CHOICES:
-            if n[1] == row[name]:
-                row['name'] = n[0]
+        for n in Pref.PREF_CHOICES:
+            if n[1] == row['pref']:
+                row['pref'] = n[0]
                 break
+
+
 class ShopAdmin(ImportMixin, admin.ModelAdmin):
-    list_display = ['id', 'shop']
+    list_display = ['id', 'name']
     resource_class = ShopResource
-    formats = [base_formats.CSV]
+    formats = [base_formats.TSV]
 
 #カーモデル
 class CarModelResource(ModelResource):
+    id = Field(attribute='id', column_name='id')
+    manufacturer = Field(attribute='manufacturer', column_name='manufacturer', widget=ForeignKeyWidget(Manufacturer, 'name'))
     name = Field(attribute='name', column_name='name')
-    manufacturer = Field(attribute='manufacturer', column_name='manufacturer', widget=ForeignKeyWidget(CarModel, 'manufacturer'))
 
     class Meta:
         model =  CarModel
-        import_order = ('name','manufacturer')
+        import_order = ('manufacturer', 'name')
 
-    def before_import_row(self, row, row_number=None, **kwargs):
-        for n in CarModel.NAME_CHOICES:
-            if n[1] == row[name]:
-                row['name'] = n[0]
-                break
 
 class CarModelAdmin(ImportMixin, admin.ModelAdmin):
     list_display = ['name', 'manufacturer']
     resource_class = CarModelResource
-    formats = [base_formats.CSV]
-
-
+    formats = [base_formats.TSV]
 
 
 admin.site.register(Car, CarAdmin)
-admin.site.register(Manufacturer)
-admin.site.register(CarModel)
-admin.site.register(Shop)
+admin.site.register(Manufacturer, ManufacturerAdmin)
+admin.site.register(CarModel, CarModelAdmin)
+admin.site.register(Shop, ShopAdmin)
