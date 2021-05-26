@@ -1,0 +1,21 @@
+id,carmodel,shop name,color,gear,drive,body_type,model_year,plate_category,mileage,inspection_date,price,URL
+1,PRIUS,KANAGAWA auto,White,AT,FF,SEDAN,2001,3,24000,2021/3/30,650000,https://www.carsensor.net/usedcar/detail/VU5599037473/index.html?TRCD=200002&RESTID=CS210610
+2,SKYLINE,TOKYO 中古車センター,Black,MT,FR,SEDAN,2012,3,44000,2021/3/30,105000,https://www.carsensor.net/usedcar/detail/VU5632292094/index.html?TRCD=200002&RESTID=CS210610
+3,MR-2,TOKYO 中古車センター,Yellow,MT,MIDSHIP,COUPE,1993,5,190000,2021/4/1,3000000,https://www.carsensor.net/usedcar/detail/VU6033237074/index.html?TRCD=200002&RESTID=CS210610
+4,HIGH-ACE,TOKYO 中古車センター,Silver,AT,FF,WAGON,1997,3,170000,2021/4/1,200000,https://www.carsensor.net/usedcar/detail/VU5906725480/index.html?TRCD=200002&RESTID=CS210610
+5,CX-5,KANAGAWA auto,Red,MT,FF,WAGON,2015,3,9000,2021/4/3,2000000,https://www.carsensor.net/usedcar/detail/VU5945351537/index.html?TRCD=200002&RESTID=CS210610
+6,S2000,TOKYO 中古車センター,Yellow,MT,FR,COUPE,1999,3,120000,2021/4/3,1200000,https://www.carsensor.net/usedcar/detail/VU5889102076/index.html?TRCD=200002&RESTID=CS210610
+7,IMPREZA Sti,KANAGAWA auto,Black,MT,4WD,SEDAN,1998,5,150000,2021/4/3,12000000,https://www.carsensor.net/usedcar/detail/VU5998517459/index.html?TRCD=200002&RESTID=CS210610
+8,PAJERO,TOKYO 中古車センター,Black,MT,4WD,WAGON,1990,3,199000,2021/4/13,300000,https://www.carsensor.net/usedcar/detail/VU5441677308/index.html?TRCD=200002&RESTID=CS210610
+9,JIMNY,KANAGAWA auto,Silver,MT,4WD,WAGON,2014,5,70000,2021/5/2,450000,https://www.carsensor.net/usedcar/detail/VU5532492167/index.html?TRCD=200002&RESTID=CS210610
+10,COROLA,KANAGAWA auto,White,AT,FF,SEDAN,2018,3,5000,2021/5/2,2400000,https://www.carsensor.net/usedcar/detail/VU5798264985/index.html?TRCD=200002&RESTID=CS210610
+11,E30,TOKYO 中古車センター,Black,MT,4WD,COUPE,1985,3,190000,2021/5/2,9000000,https://www.goo-net.com/usedcar/spread/goo/13/700055168730190124001.html
+12,ヴィッツ,TOKYO 中古車センター,White,MT,FF,COUPE,2016,5,29000,2021/5/15,1090000,https://www.carsensor.net/usedcar/detail/VU5881428698/index.html?TRCD=200002&RESTID=CS210610
+13,ポルシェ911,KANAGAWA auto,Black,MT,4WD,COUPE,2018,3,9000,2021/5/15,12000000,https://www.carsensor.net/usedcar/detail/VU4480086616/index.html?TRCD=200002&RESTID=CS210610
+14,ベンツSクラス,KANAGAWA auto,Silver,AT,FF,SEDAN,2020,3,1000,2021/5/15,9000000,https://www.carsensor.net/usedcar/detail/VU5614311357/index.html?TRCD=200002&RESTID=CS210610
+15,ベンツG350d ヘリテージ,KANAGAWA auto,Red,AT,4WD,WAGON,2018,3,1000,2021/5/15,12000000,https://www.carsensor.net/usedcar/detail/VU5339127990/index.html?TRCD=200002&RESTID=CS210610
+16,アトレーワゴン,KANAGAWA auto,Silver,AT,4WD,WAGON,2008,5,49000,2021/5/18,600000,https://www.carsensor.net/usedcar/detail/VU5903147586/index.html?TRCD=200002&RESTID=CS210610
+17,コペンセロ,TOKYO 中古車センター,Black,MT,FF,COUPE,2015,5,67000,2021/5/21,1500000,https://www.carsensor.net/usedcar/detail/VU5869368966/index.html?TRCD=200002&RESTID=CS210610
+18,フォレスター,TOKYO 中古車センター,Black,MT,4WD,WAGON,2000,3,70000,2021/5/21,300000,https://www.carsensor.net/usedcar/detail/VU5791046730/index.html?TRCD=200002&RESTID=CS210610
+19,NOAH,KANAGAWA auto,Silver,AT,4WD,WAGON,2014,5,30000,2021/5/21,1500000,https://www.carsensor.net/usedcar/detail/VU5571622042/index.html?TRCD=200002&RESTID=CS210610
+20,ハチロク,TOKYO 中古車センター,Red,MT,FR,COUPE,2011,3,1000,2021/05/24,450000,https://www.carsensor.net/usedcar/detail/VU5695078833/index.html?TRCD=200002&RESTID=CS210610
