@@ -1,4 +1,4 @@
-from cars.models import Car, Manufacturer
+from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 
@@ -35,3 +35,15 @@ def maker_list(request):
         'makers': makers
     }
     return render(request, 'maker_list.html', context)
+
+def maker_cars(request, manufacturer_id):
+    try:
+        models = CarModel.objects.filter(manufacturer=manufacturer_id)
+        cars = Car.objects.filter(carmodel__in=models)
+    except CarModel.DoesNotExist:
+        raise Http404("cars does not exist")
+
+    context = {
+        'cars':cars
+    }
+    return render(request, 'maker_cars.html', context)
