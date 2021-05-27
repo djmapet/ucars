@@ -36,6 +36,7 @@ def maker_list(request):
     }
     return render(request, 'maker_list.html', context)
 
+
 def maker_cars(request, manufacturer_id):
     try:
         models = CarModel.objects.filter(manufacturer=manufacturer_id)
@@ -43,7 +44,11 @@ def maker_cars(request, manufacturer_id):
     except CarModel.DoesNotExist:
         raise Http404("cars does not exist")
 
+    except Car.DoesNotExist:
+        raise Http404("cars does not exist")
+
     context = {
-        'cars':cars
+        'cars': cars
     }
     return render(request, 'maker_cars.html', context)
+
