@@ -1,6 +1,6 @@
 <p>shop cars list</p>
 <ul>
   {% for car in cars %}
-      <li><a href="/shop/cars{{ car.name }}">{{ car.carmodel.name }}</a></li>
+      <li><a href="/car/{{car.id}}">{{ car.carmodel.name }}</a></li>
   {% endfor %}
 </ul>

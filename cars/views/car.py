@@ -21,7 +21,7 @@ def detail(request, car_id=1):
         'color': color,
         'mileage': mileage,
         'model_name': model_name,
-        'manufacturer': manufacturer
+        'manufacturer': manufacturer,
         }
     return render(request, 'car_detail.html', context)
 
@@ -51,4 +51,3 @@ def maker_cars(request, manufacturer_id):
         'cars': cars
     }
     return render(request, 'maker_cars.html', context)
-

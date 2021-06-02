@@ -23,6 +23,6 @@ def shop_cars(request, shop_id):
         raise Http404("shop does not exist")
 
     context = {
-        'cars': cars
+        'cars' : cars,
     }
     return render(request, 'shop_cars.html', context)
