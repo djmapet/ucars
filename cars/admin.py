@@ -7,6 +7,7 @@ from import_export.formats import base_formats
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
 from .models import Manufacturer, CarModel, Car, Shop, Pref
+import datetime
 
 class CarResource(ModelResource):
     id = Field(attribute='id', column_name='id')
@@ -19,7 +20,7 @@ class CarResource(ModelResource):
     model_year = Field(attribute='model_year', column_name='model_year')
     plate_category = Field(attribute='plate_category', column_name='plate_category')
     mileage = Field(attribute='mileage', column_name='mileage')
-    inspection_date = Field(attribute='inspection_date', column_name='inspection_date')
+    inspection_date = Field(attribute='latest_inspection_date', column_name='inspection_date')
     price = Field(attribute='price', column_name='price')
 
     class Meta:
@@ -47,6 +48,8 @@ class CarResource(ModelResource):
             if n[1] == row['body_type']:
                 row['body_type'] = n[0]
                 break
+        d = datetime.datetime.strptime(row['inspection_date'], "%Y-%y-%d")
+        row['inspection_date'] = datetime.date(d.year, d.month, d.day)
 
 class CarAdmin(ImportMixin, admin.ModelAdmin):
     list_display = ['id', 'shop']
