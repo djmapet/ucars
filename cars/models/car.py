@@ -107,6 +107,15 @@ class Car(models.Model):
     def get_color(self):
         return self.get_color_display()
 
+    def get_gear(self):
+        return self.get_gear_display()
+
+    def get_body_type(self):
+        return self.get_body_type_display()
+
+    def get_drive(self):
+        return self.get_drive_display()
+
 
 class CarImage(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)

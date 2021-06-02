@@ -14,6 +14,11 @@ def detail(request, car_id=1):
         carmodel=car.carmodel
         model_name = carmodel.name
         manufacturer = carmodel.manufacturer
+        gear = car.get_gear()
+        body_type = car.get_body_type()
+        price = car.price
+        latest_inspection_date = car.latest_inspection_date
+        drive = car.get_drive()
     except Car.DoesNotExist:
         raise Http404("Car does not exist")
 
@@ -22,6 +27,11 @@ def detail(request, car_id=1):
         'mileage': mileage,
         'model_name': model_name,
         'manufacturer': manufacturer,
+        'gear' : gear,
+        'BodyType': body_type,
+        'price': price,
+        'LastInspectionDate': latest_inspection_date,
+        'drive' : drive,
         }
     return render(request, 'car_detail.html', context)
 
