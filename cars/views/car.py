@@ -19,6 +19,7 @@ def detail(request, car_id=1):
         price = car.price
         latest_inspection_date = car.latest_inspection_date
         drive = car.get_drive()
+        model_year = car.model_year
     except Car.DoesNotExist:
         raise Http404("Car does not exist")
 
@@ -32,6 +33,7 @@ def detail(request, car_id=1):
         'price': price,
         'LastInspectionDate': latest_inspection_date,
         'drive' : drive,
+        'model_year' : model_year,
         }
     return render(request, 'car_detail.html', context)
 

@@ -83,9 +83,9 @@ class Car(models.Model):
         (TYPE_COUPE, 'COUPE'),
         (TYPE_WAGON, 'WAGON'),
     ]
-    body_type = models.IntegerField('BodyType', choices=DRIVE_CHOICES, default=DRIVE_UNKNOWN, null=False)
+    body_type = models.IntegerField('BodyType', choices=BODY_TYPE_CHOICES, default=DRIVE_UNKNOWN, null=False)
 
-    model_year = models.PositiveIntegerField('model year', null=True)
+    model_year = models.PositiveIntegerField('model year', default=0)
 
     PLATE_CATEGORY_UNKNOWN = 0
     PLATE_CATEGORY_A = 1
@@ -101,7 +101,7 @@ class Car(models.Model):
     plate_category = models.IntegerField(choices=PLATE_CATEGORY_CHOICES, default=PLATE_CATEGORY_UNKNOWN, null=False)
 
     mileage = models.PositiveIntegerField('mileage', default=0)
-    latest_inspection_date = models.DateField('LastInspectionDate', null=True)
+    latest_inspection_date = models.PositiveIntegerField('LastInspectionDate', default=0)
     price = models.PositiveIntegerField('price', default=0)
 
     def get_color(self):
