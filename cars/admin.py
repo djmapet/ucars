@@ -48,11 +48,11 @@ class CarResource(ModelResource):
             if n[1] == row['body_type']:
                 row['body_type'] = n[0]
                 break
-        d = datetime.datetime.strptime(row['inspection_date'], "%Y-%y-%d")
+        d = datetime.datetime.strptime(row['inspection_date'], "%Y-%m-%d")
         row['inspection_date'] = datetime.date(d.year, d.month, d.day)
 
 class CarAdmin(ImportMixin, admin.ModelAdmin):
-    list_display = ['id', 'shop']
+    list_display = ['id', 'carmodel']
     resource_class = CarResource
     formats = [base_formats.TSV]
 
