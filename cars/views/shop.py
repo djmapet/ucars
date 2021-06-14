@@ -14,3 +14,15 @@ def shop_info(request, shop_id):
         'email': shop.email,
         }
     return render(request, 'shop_info.html', context)
+
+def shop_cars(request, shop_id):
+    try:
+        cars = Car.objects.filter(shop=shop_id)
+
+    except Car.DoesNotExist:
+        raise Http404("shop does not exist")
+
+    context = {
+        'cars' : cars,
+    }
+    return render(request, 'shop_cars.html', context)

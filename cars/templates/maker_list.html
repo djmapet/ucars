@@ -1,0 +1,6 @@
+<p>maker list</p>
+<ul>
+{% for maker in makers %}
+    <li><a href="/maker/{{ maker.id }}">{{ maker.name }}</a></li>
+{% endfor %}
+</ul>

@@ -1,0 +1,6 @@
+<p>Maker's car list</p>
+<ul>
+  {% for car in cars %}
+      <li><a href="/car/{{ car.id }}">{{ car.carmodel.name }}</a></li>
+  {% endfor %}
+</ul>
