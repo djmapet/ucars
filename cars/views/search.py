@@ -18,7 +18,7 @@ def search(request):
         drive = car.get_drive()
         model_year = car.model_year
     except Car.DoesNotExist:
-        raise Http404("Car does not exist")
+        raise Http404("Seach does not exist")
 
     context = {
         'color': color,
