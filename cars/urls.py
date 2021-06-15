@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import car, shop
+from .views import car, shop , search
 
 urlpatterns = [
     path('car/<int:car_id>', car.detail),
