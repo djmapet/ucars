@@ -3,33 +3,23 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render
 
 
-def search(request):
+def search(request,car_id):
     try:
-        car = Car.objects.get(pk=car_id)
-        color = car.get_color()
-        mileage = car.mileage
-        carmodel=car.carmodel
-        model_name = carmodel.name
-        manufacturer = carmodel.manufacturer
-        gear = car.get_gear()
-        body_type = car.get_body_type()
-        price = car.price
-        latest_inspection_date = car.latest_inspection_date
-        drive = car.get_drive()
-        model_year = car.model_year
-    except Car.DoesNotExist:
-        raise Http404("Seach does not exist")
-
-    context = {
-        'color': color,
-        'mileage': mileage,
-        'model_name': model_name,
-        'manufacturer': manufacturer,
-        'gear' : gear,
-        'BodyType': body_type,
-        'price': price,
-        'LastInspectionDate': latest_inspection_date,
-        'drive' : drive,
-        'model_year' : model_year,
-        }
-    return render(request, 'search.html', context)
+        search_car = car.carmodel.get(pk=request.POST['car'])
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(request, 'cars/search.html', {
+            'car': car,
+            'error_message': "You didn't select a car.",
+        })
+    else:
+        selected_ca.color += 6
+        selected_ca.gear += 3
+        selected_ca.drive += 6
+        selected_ca.body_type += 7
+        selected_ca.plate_category += 5
+        selected_car.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return render(request, 'search.html')
