@@ -1,0 +1,24 @@
+<form action="{% url 'cars:search' car.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend>
+      <h1>{{ car.carmodel }}</h1>
+      <h1>{{ car.shop }}</h1>
+      <h1>{{ car.color }}</h1>
+      <h1>{{ car.gear }}</h1>
+      <h1>{{ car.drive }}</h1>
+      <h1>{{ car.body_type }}</h1>
+    </legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% for choice in car.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ car.carmodel }}</label><br>
+        <label for="choice{{ forloop.counter }}">{{ car.shop }}</label><br>
+        <label for="choice{{ forloop.counter }}">{{ car.color }}</label><br>
+        <label for="choice{{ forloop.counter }}">{{ car.gear }}</label><br>
+        <label for="choice{{ forloop.counter }}">{{ car.drive }}</label><br>
+        <label for="choice{{ forloop.counter }}">{{ car.body_type }}</label><br>
+    {% endfor %}
+</fieldset>
+<input type="submit" value="検索">
+</form>
