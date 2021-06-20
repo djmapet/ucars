@@ -17,7 +17,12 @@ def top(request):
     context = {
         'makers': makers,
         'car_models': car_models,
-        'gears' : Car.GEAR_CHOICES
+        'gears' : Car.GEAR_CHOICES,
+        'color' : Car.COLOR_CHOICES,
     }
 
     return render(request, 'search.html', context)
+
+
+def results(request):
+    return render(request, 'results.html', {'makers': makers,'car_models': car_models,'gears' : Car.GEAR_CHOICES,'color' : Car.COLOR_CHOICES,})
