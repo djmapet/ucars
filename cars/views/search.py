@@ -1,6 +1,6 @@
 from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404,render
 
 
 def top(request):
@@ -25,4 +25,5 @@ def top(request):
 
 
 def results(request):
-    return render(request, 'results.html', {'makers': makers,'car_models': car_models,'gears' : Car.GEAR_CHOICES,'color' : Car.COLOR_CHOICES,})
+    car = get_object_or_404(Car, pk=car_id)
+    return render(request, 'results.html', {'car': car})
