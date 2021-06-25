@@ -8,43 +8,5 @@
 
 {{ form.as_p }}
 
-<fieldset>
-    <div>
-      <p>メーカーを選んでください</p>
-      {% for choice in makers %}
-        <input type="radio" name="maker" value="{{ choice.id }}">
-          <label for="choice{{ forloop.counter }}">{{ choice.name }}</label>
-      {% endfor %}
-    </div>
-    <div>
-      <p>車種を選んでください</p>
-      {% for choice in car_models %}
-        <input type="checkbox" name="maker" value="{{ choice.id }}">
-          <label for="choice{{ forloop.counter }}">{{ choice.name }}</label>
-      {% endfor %}
-    </div>
-    <div>
-      <p>ギアタイプを選んでください</p>
-      {% for choice in gears %}
-        <input type="checkbox" name="gear" value="{{ choice.0 }}">
-          <label for="choice{{ forloop.counter }}">{{ choice.1 }}</label>
-      {% endfor %}
-    </div>
-    <div>
-      <p>色を選んでください</p>
-      {% for choice in color %}
-        <input type="checkbox" name="gear" value="{{ choice.0 }}">
-          <label for="choice{{ forloop.counter }}">{{ choice.1 }}</label>
-      {% endfor %}
-    </div>
-    <div>
-      <p>走行距離を選んでください</p>
-      {% for choice in mileage %}
-        <input type="radio" name="mileage" value="{{ choice.0 }}">
-          <label for="choice{{ forloop.counter }}">{{ choice.1 }}</label>
-      {% endfor %}
-    </div>
-
-</fieldset>
 <input type="submit" value="検索">
 </form>
