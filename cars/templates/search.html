@@ -3,7 +3,7 @@
 {% if carmodel_result %}
     {% for car in carmodel_result %}
         {{ car.carmodel.name }}<br>
-        ギア:{{ car.get_gear }} 走行距離:{{ car.mileage }} 車の色:{{ car.get_color }}<br>
+        メーカー:{{car.carmodel.manufacturer.name}} ギア:{{ car.get_gear }} 走行距離:{{ car.mileage }} 車の色:{{ car.get_color }}<br>
     {% endfor %}
 {% endif %}
 
