@@ -29,6 +29,7 @@ def top(request):
     return render(request, 'search.html', context)
 
 
+
 def results(request):
     car = get_object_or_404(Car, pk=car_id)
     return render(request, 'results.html', {'car': car})

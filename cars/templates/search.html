@@ -2,7 +2,8 @@
 {% csrf_token %}
 {% if carmodel_result %}
     {% for car in carmodel_result %}
-        {{ car.id }}<br>
+        {{ car.carmodel.name }}<br>
+        ギア:{{ car.get_gear }} 走行距離:{{ car.mileage }} 車の色:{{ car.get_color }}<br>
     {% endfor %}
 {% endif %}
 
