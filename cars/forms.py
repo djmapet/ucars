@@ -4,7 +4,7 @@ from cars.models import Car, Manufacturer, CarModel
 class SearchForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = {'carmodel', 'gear', 'color', 'mileage'}
+        fields = {'carmodel', 'body_type','gear', 'color', 'mileage','latest_inspection_date','price'}
 
     def clean_carmodel(self):
         carmodel = self.cleaned_data.get('carmodel')

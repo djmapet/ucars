@@ -10,6 +10,7 @@ def top(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             selected_carmodel = form.cleaned_data['carmodel']
+            selected_body_type = form.cleaned_data['body_type']
             selected_color = form.cleaned_data['color']
             selected_gear = form.cleaned_data['gear']
             mileage = form.cleaned_data['mileage']
@@ -18,6 +19,8 @@ def top(request):
                 cars = Car.objects.all()
                 if selected_carmodel:
                     cars = cars.filter(carmodel=int(selected_carmodel.id))
+                if selected_body_type:
+                    cars = cars.filter(body_type=selected_body_type)
                 if selected_color:
                     cars = cars.filter(color=selected_color)
                 if selected_gear:
@@ -33,6 +36,7 @@ def top(request):
         'carmodel_result' : cars,
         'form' : form,
     }
+
 
     return render(request, 'search.html', context)
 

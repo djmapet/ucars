@@ -2,8 +2,8 @@
 {% csrf_token %}
 {% if carmodel_result %}
     {% for car in carmodel_result %}
-        {{ car.carmodel.name }}<br>
-        メーカー:{{car.carmodel.manufacturer.name}} ギア:{{ car.get_gear }} 走行距離:{{ car.mileage }} 車の色:{{ car.get_color }}<br>
+        <li>名前:{{ car.carmodel.name }}</li> <li>メーカー:{{car.carmodel.manufacturer.name}}</li>
+        <li>価格:{{car.get_price}} 車種:{{car.get_body_type}} ギア:{{ car.get_gear }} 走行距離:{{ car.mileage }} 車の色:{{ car.get_color }}  車検日:{{car.get_latest_inspection_date}}</li><br>
     {% endfor %}
 {% endif %}
 
