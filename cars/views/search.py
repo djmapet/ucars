@@ -27,6 +27,7 @@ def top(request):
                     cars = cars.filter(gear=selected_gear)
                 if int(mileage) > 0:
                     cars = cars.filter(mileage__lt=mileage)
+                
             except Manufacturer.DoesNotExist:
                 raise Http404("maker does not exist")
     else:
