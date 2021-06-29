@@ -5,7 +5,7 @@ from cars.forms import SearchForm
 
 
 def top(request):
-    carmodel_result = []
+    cars = None
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
@@ -15,14 +15,22 @@ def top(request):
             mileage = form.cleaned_data['mileage']
 
             try:
-                carmodel_result = Car.objects.filter(carmodel=int(selected_carmodel.id))
+                cars = Car.objects.all()
+                if selected_carmodel:
+                    cars = cars.filter(carmodel=int(selected_carmodel.id))
+                if selected_color:
+                    cars = cars.filter(color=selected_color)
+                if selected_gear:
+                    cars = cars.filter(gear=selected_gear)
+                if int(mileage) > 0:
+                    cars = cars.filter(mileage__lt=mileage)
             except Manufacturer.DoesNotExist:
                 raise Http404("maker does not exist")
     else:
         form = SearchForm()
 
     context = {
-        'carmodel_result' : carmodel_result,
+        'carmodel_result' : cars,
         'form' : form,
     }
 
