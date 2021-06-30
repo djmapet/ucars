@@ -14,6 +14,8 @@ def top(request):
             selected_color = form.cleaned_data['color']
             selected_gear = form.cleaned_data['gear']
             mileage = form.cleaned_data['mileage']
+            price = form.cleaned_data['price']
+            latest_inspection_date = form.cleaned_data['latest_inspection_date']
 
             try:
                 cars = Car.objects.all()
@@ -27,7 +29,9 @@ def top(request):
                     cars = cars.filter(gear=selected_gear)
                 if int(mileage) > 0:
                     cars = cars.filter(mileage__lt=mileage)
-                
+                if int(price) > 0:
+                    cars = cars.filter(price__lt=price)
+
             except Manufacturer.DoesNotExist:
                 raise Http404("maker does not exist")
     else:
