@@ -13,3 +13,4 @@ class SearchForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['carmodel'].required = False
+        self.fields['latest_inspection_date'].required = False

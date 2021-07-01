@@ -32,6 +32,10 @@ def top(request):
                 if int(price) > 0:
                     cars = cars.filter(price__lt=price)
 
+                if latest_inspection_date:
+                    cars = cars.filter(latest_inspection_date__lt=latest_inspection_date)
+
+
             except Manufacturer.DoesNotExist:
                 raise Http404("maker does not exist")
     else:
