@@ -27,7 +27,7 @@ def top(request):
                     cars = cars.filter(color=selected_color)
                 if selected_gear:
                     cars = cars.filter(gear=selected_gear)
-                if int(mileage) > 0:
+                if mileage != None:
                     cars = cars.filter(mileage__lt=mileage)
                 if int(price) > 0:
                     cars = cars.filter(price__lt=price)
