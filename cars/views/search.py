@@ -29,11 +29,10 @@ def top(request):
                     cars = cars.filter(gear=selected_gear)
                 if mileage != None:
                     cars = cars.filter(mileage__lt=mileage)
-                if int(price) > 0:
-                    cars = cars.filter(price__lt=price)
-
                 if latest_inspection_date:
                     cars = cars.filter(latest_inspection_date__lt=latest_inspection_date)
+                if price != None:
+                    cars = cars.filter(price__lt=price)
 
 
             except Manufacturer.DoesNotExist:

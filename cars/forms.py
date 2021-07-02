@@ -15,3 +15,4 @@ class SearchForm(forms.ModelForm):
         self.fields['carmodel'].required = False
         self.fields['latest_inspection_date'].required = False
         self.fields['mileage'].required = False
+        self.fields['price'].required = False
