@@ -100,8 +100,6 @@ class Car(models.Model):
     ]
     plate_category = models.IntegerField(choices=PLATE_CATEGORY_CHOICES, default=PLATE_CATEGORY_UNKNOWN, null=False)
 
-
-
     mileage = models.PositiveIntegerField('mileage', default=0)
     latest_inspection_date = models.DateField('LastInspectionDate', null=True)
     price = models.PositiveIntegerField('price', default=0)
