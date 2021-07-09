@@ -16,3 +16,31 @@ class SearchForm(forms.ModelForm):
         self.fields['latest_inspection_date'].required = False
         self.fields['mileage'].required = False
         self.fields['price'].required = False
+
+class Edit(forms.ModelForm):
+    class Meta:
+        model = Car,CarModel
+        fields = ('name', 'manufacturer','color','gear','body_type','drive','mileage','model_year','price'),'__all__'
+        labels = {
+            'name': '車の名前',
+            'manufacturer': 'メーカー',
+            'color':'車の色',
+            'gear':'ギア',
+            'body_type':'ボデイタイプ',
+            'drive':'駆動方式',
+            'mileage':'駆動方式',
+            'model_year':'年式',
+            'price':'値段'
+        }
+
+        help_text = {
+            'name': '車の名前を入力',
+            'manufacturer': 'メーカーを選択',
+            'color':'車の色を選択',
+            'gear':'ギアを選択',
+            'body_type':'ボデイタイプを選択',
+            'drive':'駆動方式を選択',
+            'mileage':'駆動方式を選択',
+            'model_year':'年式を選択',
+            'price':'値段を入力'
+        }

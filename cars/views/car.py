@@ -63,3 +63,22 @@ def maker_cars(request, manufacturer_id):
         'cars': cars
     }
     return render(request, 'maker_cars.html', context)
+
+def new_car(request):
+    params = {'message': '', 'form': None}
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list')
+        else:
+            params['message'] = '再入力して下さい'
+            params['form'] = form
+    else:
+        params['form'] = UserForm()
+    return render(request, 'edit.html', params)
+
+def new_register_list(request):
+    data = Member.objects.all()
+    params = {'message': 'メンバーの一覧', 'data': data}
+    return render(request, 'edit.html', params)    
