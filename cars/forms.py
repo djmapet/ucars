@@ -17,10 +17,11 @@ class SearchForm(forms.ModelForm):
         self.fields['mileage'].required = False
         self.fields['price'].required = False
 
-class Edit(forms.ModelForm):
+class EditForm(forms.ModelForm):
     class Meta:
-        model = Car,CarModel
-        fields = ('name', 'manufacturer','color','gear','body_type','drive','mileage','model_year','price'),'__all__'
+        model = Car
+        fields = {'color','gear','body_type','drive','mileage','model_year','price'} #,'__all__'
+
         labels = {
             'name': '車の名前',
             'manufacturer': 'メーカー',
@@ -44,3 +45,4 @@ class Edit(forms.ModelForm):
             'model_year':'年式を選択',
             'price':'値段を入力'
         }
+
