@@ -1,7 +1,7 @@
 from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from cars.forms import EditForm
+from cars.forms import NewCarForm
 
 
 # Create your views here.
@@ -67,22 +67,15 @@ def maker_cars(request, manufacturer_id):
     return render(request, 'maker_cars.html', context)
 
 def edit(request):
-    params = {'message': '', 'form': None}
-    if request.method == 'POST':
-        form = EditForm(request.POST)
+    if request == 'POST':
+        form = NewCarForm(request.POST)
         if form.is_valid():
-            form.save()
-            #return redirect('list')
-        else:
-            params['message'] = '再入力して下さい'
-            params['form'] = form
-    else:
-        params['form'] = EditForm()
-    return render(request, 'edit.html', params)
+            # process the data in form.cleaned_data as required
+            car = form.save()
 
-"""
-def new_register_list(request):
-    data = Member.objects.all()
-    params = {'message': 'メンバーの一覧', 'data': data}
-    return render(request, 'edit.html', params)    
-"""
+    else:
+        form = NewCarForm()
+
+    return render   (request, 'edit.html', {'form': form})
+
+
