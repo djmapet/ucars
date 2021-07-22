@@ -17,7 +17,6 @@ class SearchForm(forms.ModelForm):
         self.fields['mileage'].required = False
         self.fields['price'].required = False
 
-
 class EditForm(forms.ModelForm):
     class Meta:
         model = Car
