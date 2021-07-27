@@ -2,6 +2,7 @@ from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from cars.forms import NewCarForm
+from django.shortcuts import redirect
 
 
 # Create your views here.
@@ -68,24 +69,17 @@ def maker_cars(request, manufacturer_id):
 
 def edit(request):
     cars = None
-    if request == 'POST':
+    if request.method == 'POST':
         form = NewCarForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            selected_carmodel = form.cleaned_data['carmodel']
-            selected_body_type = form.cleaned_data['body_tyoe']
-            selected_color = form.cleaned_data['color']
-            selected_gear = form.cleaned_data['gear']
-            mileage = form.cleaned_data['mileage']
-            price = form.cleaned_data['price']
-            latest_inspection_date = form.cleaned_data['latest_inspection_date']
             post.save()
             # process the data in form.cleaned_data as required
 
             try:
                 cars = Car.objects.all()
-                if selected_carmodel:
-                    cars = cars.selected(carmodel=int(selected_carmodel.id))
+                if carmodel:
+                    cars = cars.filter(carmodel=carmodel.name)
                 if selected_body_type:
                     cars = cars.selected(body_type=selected_body_type)
                 if selected_color:
@@ -100,8 +94,10 @@ def edit(request):
                     cars = cars.filter(price__lt=price)
             except Car.DoesNotExist:
                 raise Http404("maker does not exist")
-
+        else:
+            print("error:%s" % form.is_valid())
     else:
+        print("form else")
         form = NewCarForm()
 
     context = {

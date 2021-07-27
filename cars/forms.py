@@ -20,13 +20,13 @@ class SearchForm(forms.ModelForm):
 
 
 
-class NewCarForm(forms.Form):
+class NewCarForm(forms.ModelForm):
     class Meta:
         model = Car
         fields = {'color', 'gear', 'body_type', 'drive', 'mileage', 'model_year', 'price'}
 
         labels = {
-            'name': '車の名前',
+            'carmodel': '車の名前',
             'manufacturer': 'メーカー',
             'color': '車の色',
             'gear': 'ギア',

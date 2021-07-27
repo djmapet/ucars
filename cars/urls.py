@@ -7,7 +7,7 @@ urlpatterns = [
     path('shop/cars/<int:shop_id>', shop.shop_cars),
     path('shop/<int:shop_id>', shop.shop_info),
     path('edit', car.edit, name="edit"),
-    path('search', search.top, name='search'),
+    path('search/new/', search.top, name='search'),
     path('results/<int:car_id>', search.results, name='result'),
     path('', car.maker_list),
 ]
