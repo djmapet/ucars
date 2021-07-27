@@ -36,5 +36,8 @@ class NewCarForm(forms.Form):
             'model_year': '年式',
             'price': '値段'
         }
+    def clean_car(self):
+        car = self.cleaned_data.post('car')
+        return car
 
 
