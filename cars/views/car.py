@@ -68,30 +68,17 @@ def maker_cars(request, manufacturer_id):
     return render(request, 'maker_cars.html', context)
 
 def edit(request):
-    cars = None
+    car = None
     if request.method == 'POST':
         form = NewCarForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
             # process the data in form.cleaned_data as required
 
             try:
-                cars = Car.objects.all()
-                if carmodel:
-                    cars = cars.filter(carmodel=carmodel.name)
-                if selected_body_type:
-                    cars = cars.selected(body_type=selected_body_type)
-                if selected_color:
-                    cars = cars.selected(color=selected_color)
-                if selected_gear:
-                    cars = cars.selected(gear=selected_gear)
-                if mileage != None:
-                    cars = cars.CharField(mileage__lt=mileage)
-                if latest_inspection_date:
-                    cars = cars.filter(latest_inspection_date__lt=latest_inspection_date)
-                if price != None:
-                    cars = cars.filter(price__lt=price)
+                car = form.save(commit=False)
+                car.save()
+                print("car_id=%d:" % car.id)
+
             except Car.DoesNotExist:
                 raise Http404("maker does not exist")
         else:
@@ -101,7 +88,7 @@ def edit(request):
         form = NewCarForm()
 
     context = {
-        'car_edit': cars,
+        'newcar': car,
         'form': form,
     }
 

@@ -23,7 +23,7 @@ class SearchForm(forms.ModelForm):
 class NewCarForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = {'color', 'gear', 'body_type', 'drive', 'mileage', 'model_year', 'price'}
+        fields = {'carmodel', 'color', 'gear', 'body_type', 'drive', 'mileage', 'model_year', 'price'}
 
         labels = {
             'carmodel': '車の名前',
@@ -32,7 +32,7 @@ class NewCarForm(forms.ModelForm):
             'gear': 'ギア',
             'body_type': 'ボデイタイプ',
             'drive': '駆動方式',
-            'mileage': '駆動方式',
+            'mileage': '走行距離',
             'model_year': '年式',
             'price': '値段'
         }

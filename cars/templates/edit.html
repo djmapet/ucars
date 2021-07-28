@@ -4,13 +4,11 @@
   {{ form.non_field_errors }}
 {% endif %}
 
-{{ form.myfield }}
-{% if form.myfield.errors %}
-  {{ form.myfield.errors }}
+
+{% if newcar %}
+  {{ newcar.id }}<br>
+  {{ newcar.carmodel.name }}
 {% endif %}
-
-
-
 
 
 <form action="{% url 'edit' %}" method="post">
