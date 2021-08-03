@@ -1,7 +1,6 @@
 from django import forms
 from cars.models import Car, Manufacturer, CarModel
 
-
 class SearchForm(forms.ModelForm):
     class Meta:
         model = Car
@@ -37,19 +36,26 @@ class NewCarForm(forms.ModelForm):
             'price': '値段'
         }
 
-        mileage = forms.CharField(
-            label='mileage',
-            initial=1000,
-            required=True,
-        )
-
-        model_year = forms.CharField(
-            label='model_year',
-            initial=4,
-            required=True,
-        )
-
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['carmodel'].initial = None
+        self.fields['color'].initial = None
+        self.fields['gear'].initial = None
+        self.fields['body_type'].initial = None
+        self.fields['drive'].initial = None
+        self.fields['mileage'].initial = None
+        self.fields['model_year'].initial = None
+        self.fields['price'].initial = None
+        BODY_TYPE_CHOICES = [
+            ('----','None'),
+            (Car.TYPE_SEDAN, 'SEDAN'),
+            (Car.TYPE_COUPE, 'COUPE'),
+            (Car.TYPE_WAGON, 'WAGON'),
+        ]
+        self.fields['body_type'].ChoiceField(
+                                        choices = BODY_TYPE_CHOICES,
+                                        required=False,
+                                        widget=forms.widgets.Select,)
 
     def clean_car(self):
         car = self.cleaned_data.post('car')
