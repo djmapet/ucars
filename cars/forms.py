@@ -36,6 +36,21 @@ class NewCarForm(forms.ModelForm):
             'model_year': '年式',
             'price': '値段'
         }
+
+        mileage = forms.CharField(
+            label='mileage',
+            initial=1000,
+            required=True,
+        )
+
+        model_year = forms.CharField(
+            label='model_year',
+            initial=4,
+            required=True,
+        )
+
+
+
     def clean_car(self):
         car = self.cleaned_data.post('car')
         return car
