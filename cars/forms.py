@@ -1,4 +1,5 @@
 from django import forms
+import copy
 from cars.models import Car, Manufacturer, CarModel
 
 class SearchForm(forms.ModelForm):
@@ -39,7 +40,12 @@ class NewCarForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['carmodel'].initial = None
-        self.fields['color'].initial = None
+
+        color_list = copy.deepcopy(Car.COLOR_CHOICES)
+        item = (None, 'カラーを選んで下さい')
+        color_list.insert(0,item)
+        self.fields['color'].choices = color_list
+
         self.fields['gear'].initial = None
         self.fields['body_type'].initial = None
         self.fields['drive'].initial = None
@@ -47,10 +53,10 @@ class NewCarForm(forms.ModelForm):
         self.fields['model_year'].initial = None
         self.fields['price'].initial = None
 
-        l = Car.BODY_TYPE_CHOICES
-        item = (None,'None')
-        l.insert(0,item)
-        self.fields['body_type'].choices = l
+        body_type_list = copy.deepcopy(Car.BODY_TYPE_CHOICES)
+        item = (None,'ボディタイプを選んで下さい')
+        body_type_list.insert(0,item)
+        self.fields['body_type'].choices = body_type_list
 
     def clean_car(self):
         car = self.cleaned_data.post('car')
