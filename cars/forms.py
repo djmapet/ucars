@@ -46,19 +46,19 @@ class NewCarForm(forms.ModelForm):
         self.fields['mileage'].initial = None
         self.fields['model_year'].initial = None
         self.fields['price'].initial = None
-        BODY_TYPE_CHOICES = [
-            ('----','None'),
-            (Car.TYPE_SEDAN, 'SEDAN'),
-            (Car.TYPE_COUPE, 'COUPE'),
-            (Car.TYPE_WAGON, 'WAGON'),
-        ]
-        self.fields['body_type'].ChoiceField(
-                                        choices = BODY_TYPE_CHOICES,
-                                        required=False,
-                                        widget=forms.widgets.Select,)
+
+        l = Car.BODY_TYPE_CHOICES
+        item = (None,'None')
+        l.insert(0,item)
+        self.fields['body_type'].choices = l
 
     def clean_car(self):
         car = self.cleaned_data.post('car')
         return car
 
+    def clean_body_type(self):
+        body_type = self.cleaned_data.get('body_type')
+        if body_type not in [Car.TYPE_SEDAN,Car.TYPE_COUPE,Car.TYPE_WAGON]:
+            raise forms.ValidationError('選択してください')
+        return body_type
 
