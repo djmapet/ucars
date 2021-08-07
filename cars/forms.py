@@ -45,9 +45,9 @@ class NewCarForm(forms.ModelForm):
         item = (None, 'カラーを選んで下さい')
         color_list.insert(0,item)
         self.fields['color'].choices = color_list
-
         self.fields['gear'].initial = None
         self.fields['body_type'].initial = None
+
         self.fields['drive'].initial = None
         self.fields['mileage'].initial = None
         self.fields['model_year'].initial = None

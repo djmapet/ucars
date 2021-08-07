@@ -67,8 +67,13 @@ def maker_cars(request, manufacturer_id):
     }
     return render(request, 'maker_cars.html', context)
 
-def edit(request):
+def edit(request,car_id=1):
     car = None
+    try:
+        car = Car.objects.get(pk=car_id)
+    except Car.DoesNotExist:
+        raise Http404("Car does not exist")
+
     if request.method == 'POST':
         form = NewCarForm(request.POST)
         if form.is_valid():
@@ -89,6 +94,7 @@ def edit(request):
 
     context = {
         'newcar': car,
+        'car_id=1':car_id,
         'form': form,
     }
 

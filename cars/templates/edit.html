@@ -11,7 +11,7 @@
 {% endif %}
 
 
-<form action="{% url 'edit' %}" method="post">
+<form action="{% url 'edit' car_id %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
 
