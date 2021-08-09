@@ -91,7 +91,7 @@ def edit(request,car_id=None):
             print("error:%s" % form.is_valid())
     else:
         print("form else")
-        form = NewCarForm()
+        form = NewCarForm(instance=car)
 
     context = {
         'newcar': car,
