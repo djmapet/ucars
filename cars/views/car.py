@@ -84,18 +84,26 @@ def edit(request,car_id=None):
             try:
                 car = form.save(commit=False)
                 car.save()
+                status = 1
+
 
             except Car.DoesNotExist:
                 raise Http404("maker does not exist")
         else:
+            status = 2
+
             pass
     else:
         form = NewCarForm(instance=car)
+        status = 2
 
     context = {
         'newcar': car,
         'car_id':car_id,
         'form': form,
+        'status': status,
+
+
     }
 
     return render(request, 'edit.html', context)
