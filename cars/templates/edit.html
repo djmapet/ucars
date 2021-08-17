@@ -5,10 +5,6 @@
 {% endif %}
 
 
-{% if newcar %}
-  {{ newcar.id }}<br>
-  {{ newcar.carmodel.name }}
-{% endif %}
 
 {% if car_id %}
 <form action="{% url 'edit' car_id %}" method="post">

@@ -72,6 +72,7 @@ def edit(request,car_id=None):
     if car_id:
         try:
             car = Car.objects.get(pk=car_id)
+
         except Car.DoesNotExist:
             raise Http404("Car does not exist")
 
@@ -83,14 +84,12 @@ def edit(request,car_id=None):
             try:
                 car = form.save(commit=False)
                 car.save()
-                print("car_id=%d:" % car.id)
 
             except Car.DoesNotExist:
                 raise Http404("maker does not exist")
         else:
-            print("error:%s" % form.is_valid())
+            pass
     else:
-        print("form else")
         form = NewCarForm(instance=car)
 
     context = {
