@@ -85,50 +85,27 @@ def edit(request,car_id=None):
             try:
                 car = form.save(commit=False)
                 car.save()
-                status = 1
-                color = car.get_color()
-                mileage = car.mileage
-                carmodel = car.carmodel
-                model_name = carmodel.name
-                gear = car.get_gear()
-                body_type = car.get_body_type()
-                price = car.price
-                drive = car.get_drive()
-                model_year = car.model_year
 
                 if car_id:
-                    message = car_id,"の情報を更新しました"
+                    message =  " car_id %d の情報を更新しました" % (car_id)
                 else:
-                    message = car_id,"を新規に登録しました"
+                    message = "car_id %d を新規に登録しました" % (car_id)
                 context = {
-                    'status' : status,
                     'message' : message,
-                    'color': color,
-                    'mileage': mileage,
-                    'model_name': model_name,
-                    'gear': gear,
-                    'BodyType': body_type,
-                    'price': price,
-                    'drive': drive,
-                    'model_year': model_year,
+                    'car' : car,
                 }
                 return render(request,'success.html',context)
 
             except Car.DoesNotExist:
                 raise Http404("maker does not exist")
         else:
-            status = 2
-            message = "もう一度やり直してください"
             pass
     else:
         form = NewCarForm(instance=car)
-        status = 2
 
     context = {
         'car_id':car_id,
         'form': form,
-        'status': status,
-        'message': message,
 
     }
 
