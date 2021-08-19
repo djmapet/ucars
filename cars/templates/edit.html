@@ -6,6 +6,7 @@
 
 
 status = {{ status }}<br>
+{{message}}<br>
 {% if car_id %}
 <form action="{% url 'edit' car_id %}" method="post">
 {% else %}
