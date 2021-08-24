@@ -23,7 +23,7 @@ class SearchForm(forms.ModelForm):
 class NewCarForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = {'carmodel', 'color', 'gear', 'body_type', 'drive', 'mileage', 'model_year', 'price'}
+        fields = {'carmodel', 'color', 'gear', 'body_type', 'drive', 'mileage', 'model_year', 'price', 'plate_category', 'latest_inspection_date'}
 
         labels = {
             'carmodel': '車の名前',
@@ -34,7 +34,9 @@ class NewCarForm(forms.ModelForm):
             'drive': '駆動方式',
             'mileage': '走行距離',
             'model_year': '年式',
-            'price': '値段'
+            'price': '値段',
+            'plate_category': '車のサイズ',
+            'latest_inspection_date': '車検日',
         }
 
     def __init__(self, *args, **kwargs):
@@ -52,6 +54,9 @@ class NewCarForm(forms.ModelForm):
         self.fields['mileage'].initial = None
         self.fields['model_year'].initial = None
         self.fields['price'].initial = None
+        self.fields['plate_category'].initial = None
+        self.fields['latest_inspection_date'].initial = None
+
 
         body_type_list = copy.deepcopy(Car.BODY_TYPE_CHOICES)
         item = (None,'ボディタイプを選んで下さい')

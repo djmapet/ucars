@@ -69,7 +69,6 @@ def maker_cars(request, manufacturer_id):
 
 def edit(request,car_id=None):
     car = None
-    message = None
     if car_id:
         try:
             car = Car.objects.get(pk=car_id)
@@ -87,9 +86,9 @@ def edit(request,car_id=None):
                 car.save()
 
                 if car_id:
-                    message =  " car_id %d の情報を更新しました" % (car_id)
+                    message = " car_id %d の情報を更新しました" % (car_id)
                 else:
-                    message = "car_id %d を新規に登録しました" % (car_id)
+                    message = " car_id  を新規に登録しました"
                 context = {
                     'message' : message,
                     'car' : car,
