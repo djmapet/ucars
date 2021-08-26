@@ -1,1 +1,18 @@
 <p>Edit page</p>
+
+{% if form.errors %}
+  {{ form.non_field_errors }}
+{% endif %}
+
+
+{% if car_id %}
+<form action="{% url 'edit' car_id %}" method="post">
+{% else %}
+<form action="{% url 'edit_new' %}" method="post">
+{% endif %}
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="登録">
+</form>

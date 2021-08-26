@@ -118,6 +118,9 @@ class Car(models.Model):
     def get_drive(self):
         return self.get_drive_display()
 
+    def get_plate_category(self):
+        return self.get_plate_category_display()
+
 
 class CarImage(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
