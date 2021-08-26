@@ -1,7 +1,7 @@
 from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from cars.forms import NewCarForm
+from cars.forms import NewCarForm, SearchForm
 from django.shortcuts import redirect
 
 
@@ -112,5 +112,12 @@ def edit(request,car_id=None):
     }
 
     return render(request, 'edit.html', context)
+
+def searchform(request):
+    form=SearchForm()
+    context = {'form':form,}
+    return render(request,'search.html',context)
+
+
 
 

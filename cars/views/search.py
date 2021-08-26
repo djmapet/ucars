@@ -9,30 +9,30 @@ def top(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
-            selected_carmodel = form.cleaned_data['carmodel']
-            selected_body_type = form.cleaned_data['body_type']
+            # selected_carmodel = form.cleaned_data['carmodel']
+            # selected_body_type = form.cleaned_data['body_type']
             selected_color = form.cleaned_data['color']
-            selected_gear = form.cleaned_data['gear']
-            mileage = form.cleaned_data['mileage']
-            price = form.cleaned_data['price']
-            latest_inspection_date = form.cleaned_data['latest_inspection_date']
+            # selected_gear = form.cleaned_data['gear']
+            # mileage = form.cleaned_data['mileage']
+            # price = form.cleaned_data['price']
+            # latest_inspection_date = form.cleaned_data['latest_inspection_date']
 
             try:
                 cars = Car.objects.all()
-                if selected_carmodel:
-                    cars = cars.filter(carmodel=int(selected_carmodel.id))
-                if selected_body_type:
-                    cars = cars.filter(body_type=selected_body_type)
+                # if selected_carmodel:
+                #    cars = cars.filter(carmodel=int(selected_carmodel.id))
+                # if selected_body_type:
+                #    cars = cars.filter(body_type=selected_body_type)
                 if selected_color:
-                    cars = cars.filter(color=selected_color)
-                if selected_gear:
-                    cars = cars.filter(gear=selected_gear)
-                if mileage != None:
-                    cars = cars.filter(mileage__lt=mileage)
-                if latest_inspection_date:
-                    cars = cars.filter(latest_inspection_date__lt=latest_inspection_date)
-                if price != None:
-                    cars = cars.filter(price__lt=price)
+                    cars = cars.filter(color__in=selected_color)
+                # if selected_gear:
+                #    cars = cars.filter(gear=selected_gear)
+                # if mileage != None:
+                #    cars = cars.filter(mileage__lt=mileage)
+                # if latest_inspection_date:
+                #    cars = cars.filter(latest_inspection_date__lt=latest_inspection_date)
+                # if price != None:
+                #    cars = cars.filter(price__lt=price)
 
 
             except Manufacturer.DoesNotExist:
