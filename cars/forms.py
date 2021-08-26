@@ -1,5 +1,6 @@
 from django import forms
 import copy
+from datetime import datetime,timedelta
 from cars.models import Car, Manufacturer, CarModel
 
 class SearchForm(forms.ModelForm):
@@ -73,3 +74,13 @@ class NewCarForm(forms.ModelForm):
             raise forms.ValidationError('選択してください')
         return body_type
 
+    def clean_latest_inspection_date(self):
+        latest_inspection_date = self.cleaned_data.get('latest_inspection_date')
+        today = datetime.today()
+        years_ago = today - timedelta(days=365 * 5)
+        years_late = today + timedelta(days=365 * 5)
+        if latest_inspection_date < datetime.date(years_ago):
+            raise forms.ValidationError('車検日を確認してください')
+        if latest_inspection_date > datetime.date(years_late):
+            raise forms.ValidationError('車検日を確認してください')
+        return latest_inspection_date

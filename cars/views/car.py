@@ -87,14 +87,17 @@ def edit(request,car_id=None):
 
                 if car_id:
                     message = " car_id %d の情報を更新しました" % (car_id)
+                    context = {
+                        'message': message,
+                        'car': car,
+                    }
                 else:
-                    message = " car_id  を新規に登録しました"
-                context = {
-                    'message' : message,
-                    'car' : car,
-                }
+                    message = " car_id %d を新規に登録しました" % (car.id)
+                    context = {
+                        'message' : message,
+                        'car' : car,
+                    }
                 return render(request,'success.html',context)
-
             except Car.DoesNotExist:
                 raise Http404("maker does not exist")
         else:
