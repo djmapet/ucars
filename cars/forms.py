@@ -5,11 +5,23 @@ from cars.models import Car, Manufacturer, CarModel
 
 class SearchForm(forms.Form):
 
+    carmodel = forms.DateField(
+    )
     color = forms.MultipleChoiceField(
         required=False,
         widget=forms.CheckboxSelectMultiple,
         choices=Car.COLOR_CHOICES,
     )
+    gear = forms.ChoiceField(
+        choices=Car.GEAR_CHOICES,
+    )
+    body_type = forms.ChoiceField(
+        choices=Car.BODY_TYPE_CHOICES,
+    )
+    mileage = forms.IntegerField()
+    latest_inspection_date = forms.DateField()
+    price = forms.IntegerField()
+
 class NewCarForm(forms.ModelForm):
     class Meta:
         model = Car
