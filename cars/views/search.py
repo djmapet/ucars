@@ -6,6 +6,7 @@ from cars.forms import SearchForm
 
 def top(request):
     cars = None
+    carmodel = None
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
@@ -20,7 +21,7 @@ def top(request):
             try:
                 cars = Car.objects.all()
                 if selected_carmodel:
-                    cars = cars.filter(carmodel=int(selected_carmodel.id))
+                    cars = cars.filter(carmodel__in=selected_carmodel)
                 if selected_body_type:
                     cars = cars.filter(body_type=selected_body_type)
                 if selected_color:
@@ -35,14 +36,23 @@ def top(request):
                    cars = cars.filter(price__lt=price)
 
 
+
             except Manufacturer.DoesNotExist:
                 raise Http404("maker does not exist")
     else:
         form = SearchForm()
 
+    if cars:
+        for car in cars:
+            id = car.id,
+            name = car.carmodel.name,
+            carmodel = car.carmodel,
+            print(id,name,carmodel)
+
     context = {
         'carmodel_result' : cars,
         'form' : form,
+        'carmodel' : carmodel,
     }
 
 
