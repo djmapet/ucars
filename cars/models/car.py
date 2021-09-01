@@ -24,7 +24,76 @@ class CarModel(models.Model):
 
 
 class Car(models.Model):
-    carmodel = models.ForeignKey(CarModel, on_delete=models.CASCADE)
+    CAR_UNKNOWN = 0
+    #TOYOTA = 1
+    #NISSAN = 2
+    #HONDA = 3
+    #MAZDA = 4
+    #MITSUBISHI = 5
+    #SUBARU = 6
+    #SUZUKI = 7
+    #DAIHATSU = 8
+    #PORSCHE = 9
+    #MERCEDES = 10
+    #BMW = 11
+    PRIUS = 1
+    SKYLINE = 2
+    MR2 = 3
+    HIGHACE = 4
+    CX5 = 5
+    S2000 = 6
+    IMPREZASti = 7
+    PAJERO = 8
+    JIMNY = 9
+    COROLA = 10
+    E30 = 11
+    ヴィッツ = 12
+    ポルシェ911 = 13
+    ベンツSクラス = 14
+    ベンツG350dヘリテージ = 15
+    アトレーワゴン = 16
+    コペンセロ = 17
+    フォレスター = 18
+    NOAH = 19
+    ハチロク = 20
+
+    CARMODEL_CHOICES = [
+        (CAR_UNKNOWN, 'Unknown'),
+        #(TOYOTA, 'トヨタ'),
+        #(NISSAN, '日産'),
+        #(HONDA, 'ホンダ'),
+        #(MAZDA, 'マツダ'),
+        #(MITSUBISHI, '三菱'),
+        #(SUBARU, 'スバル'),
+        #(SUZUKI, 'スズキ'),
+        #(DAIHATSU, 'ダイハツ'),
+        #(PORSCHE, 'ポルシェ'),
+        #(MERCEDES, 'メルセデス'),
+        #(BMW, 'BMW'),
+        (1, 'PRIUS'),
+        (2, 'SKYLINE'),
+        (3, 'MR-2'),
+        (4, 'HIGH-ACE'),
+        (5, 'CX-5'),
+        (6, 'S2000'),
+        (7, 'IMPREZA Sti'),
+        (8, 'PAJERO'),
+        (9, 'JIMNY'),
+        (10, 'COROLA'),
+        (11, 'E30'),
+        (12, 'ヴィッツ'),
+        (13, 'ポルシェ911'),
+        (14, 'ベンツSクラス'),
+        (15, 'ベンツG350d ヘリテージ'),
+        (16, 'アトレーワゴン'),
+        (17, 'コペンセロ'),
+        (18, 'フォレスター'),
+        (19, 'NOAH'),
+        (20, 'ハチロク'),
+    ]
+    carmodel = models.ForeignKey(CarModel, on_delete=models.CASCADE,choices=CARMODEL_CHOICES, null=False)
+
+
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True)
 
     COLOR_UNKNOWN = 0

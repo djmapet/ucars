@@ -5,7 +5,10 @@ from cars.models import Car, Manufacturer, CarModel
 
 class SearchForm(forms.Form):
 
-    carmodel = forms.DateField(
+    carmodel = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        choices=Car.CARMODEL_CHOICES,
     )
     color = forms.MultipleChoiceField(
         required=False,
