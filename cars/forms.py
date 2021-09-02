@@ -8,7 +8,7 @@ class SearchForm(forms.Form):
     carmodel = forms.MultipleChoiceField(
         required=False,
         widget=forms.CheckboxSelectMultiple,
-        choices=Car.CARMODEL_CHOICES,
+        choices=CarModel.get_carmodel_choices(),
     )
     color = forms.MultipleChoiceField(
         required=False,
@@ -17,13 +17,15 @@ class SearchForm(forms.Form):
     )
     gear = forms.ChoiceField(
         choices=Car.GEAR_CHOICES,
+        required=False
     )
     body_type = forms.ChoiceField(
         choices=Car.BODY_TYPE_CHOICES,
+        required=False
     )
-    mileage = forms.IntegerField()
-    latest_inspection_date = forms.DateField()
-    price = forms.IntegerField()
+    mileage = forms.IntegerField(required=False)
+    latest_inspection_date = forms.DateField(required=False)
+    price = forms.IntegerField(required=False)
 
 class NewCarForm(forms.ModelForm):
     class Meta:
