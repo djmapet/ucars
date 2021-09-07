@@ -42,13 +42,6 @@ def top(request):
     else:
         form = SearchForm()
 
-    if cars:
-        for car in cars:
-            id = car.id,
-            name = car.carmodel.name,
-            carmodel = car.carmodel,
-            print(id,name,carmodel)
-
     context = {
         'carmodel_result' : cars,
         'form' : form,

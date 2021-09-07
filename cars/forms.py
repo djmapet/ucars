@@ -5,27 +5,42 @@ from cars.models import Car, Manufacturer, CarModel
 
 class SearchForm(forms.Form):
 
+    fields = {'carmodel', 'color', 'gear', 'body_type', 'latest_inspection_date', 'mileage', 'price'}
+    labels = {
+        'carmodel' : '車の名前',
+        'color' :  '車の色',
+        'gear' : '車のギア',
+        'body_type' : '車種',
+        'latest_inspection_date' : '車検日',
+        'mileage' : '走行距離',
+        'price' : '価格',
+    }
+
     carmodel = forms.MultipleChoiceField(
         required=False,
         widget=forms.CheckboxSelectMultiple,
         choices=CarModel.get_carmodel_choices(),
+        label='車の名前',
     )
     color = forms.MultipleChoiceField(
         required=False,
         widget=forms.CheckboxSelectMultiple,
         choices=Car.COLOR_CHOICES,
+        label='車の色',
     )
     gear = forms.ChoiceField(
         choices=Car.GEAR_CHOICES,
-        required=False
+        required=False,
+        label='車のギア',
     )
     body_type = forms.ChoiceField(
         choices=Car.BODY_TYPE_CHOICES,
-        required=False
+        required=False,
+        label='車種',
     )
-    mileage = forms.IntegerField(required=False)
-    latest_inspection_date = forms.DateField(required=False)
-    price = forms.IntegerField(required=False)
+    mileage = forms.IntegerField(required=False,label='走行距離')
+    latest_inspection_date = forms.DateField(required=False,label='車検日')
+    price = forms.IntegerField(required=False,label='価格')
 
 class NewCarForm(forms.ModelForm):
     class Meta:
