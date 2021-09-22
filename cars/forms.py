@@ -18,7 +18,7 @@ class SearchForm(forms.Form):
 
     carmodel = forms.MultipleChoiceField(
         required=False,
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-inline'}),
         choices=CarModel.get_carmodel_choices(),
         label='車の名前',
     )
