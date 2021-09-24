@@ -28,11 +28,13 @@ class SearchForm(forms.Form):
         choices=Car.COLOR_CHOICES,
         label='車の色',
     )
+    Car.GEAR_CHOICES.insert(0, (-1, '未設定'))
     gear = forms.ChoiceField(
         choices=Car.GEAR_CHOICES,
         required=False,
         label='車のギア',
     )
+    Car.BODY_TYPE_CHOICES.insert(0, (0, '未設定'))
     body_type = forms.ChoiceField(
         choices=Car.BODY_TYPE_CHOICES,
         required=False,
@@ -41,6 +43,9 @@ class SearchForm(forms.Form):
     mileage = forms.IntegerField(required=False,label='走行距離')
     latest_inspection_date = forms.DateField(required=False,label='車検日')
     price = forms.IntegerField(required=False,label='価格')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
 
 class NewCarForm(forms.ModelForm):
     class Meta:
