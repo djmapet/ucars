@@ -26,7 +26,7 @@ def top(request):
                     cars = cars.filter(body_type=selected_body_type)
                 if selected_color:
                     cars = cars.filter(color__in=selected_color)
-                if selected_gear != int(selected_gear):
+                if int(selected_gear) != -1:
                     cars = cars.filter(gear=selected_gear)
                     print("selected_gear = %s" % selected_gear)
                 if mileage != None:
