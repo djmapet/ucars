@@ -24,12 +24,10 @@ def top(request):
                     cars = cars.filter(carmodel__in=selected_carmodel)
                 if int(selected_body_type) != 0:
                     cars = cars.filter(body_type=selected_body_type)
-                    print("selected_body_type = %s" % selected_body_type)
                 if selected_color:
                     cars = cars.filter(color__in=selected_color)
                 if int(selected_gear) != -1:
                     cars = cars.filter(gear=selected_gear)
-                    print("selected_gear = %s" % selected_gear)
                 if mileage != None:
                     cars = cars.filter(mileage__lt=mileage)
                 if latest_inspection_date:
