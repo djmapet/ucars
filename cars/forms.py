@@ -22,6 +22,7 @@ class SearchForm(forms.Form):
         choices=CarModel.get_carmodel_choices(),
         label='車の名前',
     )
+    Car.COLOR_CHOICES.insert(0, (-1, '未設定'))
     color = forms.MultipleChoiceField(
         required=False,
         widget=forms.CheckboxSelectMultiple,

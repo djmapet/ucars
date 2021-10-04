@@ -22,8 +22,9 @@ def top(request):
                 cars = Car.objects.all()
                 if selected_carmodel:
                     cars = cars.filter(carmodel__in=selected_carmodel)
-                if selected_body_type:
+                if int(selected_body_type) != 0:
                     cars = cars.filter(body_type=selected_body_type)
+                    print("selected_body_type = %s" % selected_body_type)
                 if selected_color:
                     cars = cars.filter(color__in=selected_color)
                 if int(selected_gear) != -1:
