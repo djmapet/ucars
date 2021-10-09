@@ -119,4 +119,6 @@ def searchform(request):
     return render(request,'search.html',context)
 
 
+def mypage(request):
+    return render(request,'my_page.html')
 
