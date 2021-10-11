@@ -11,5 +11,7 @@ urlpatterns = [
     path('', search.top, name='search'),
     path('results/<int:car_id>', search.results, name='result'),
     path('maker_list', car.maker_list),
+    path('shop_list',shop.shop_list),
+    path('shop_info/<int:shop_id>',shop.shop_info),
     path('my_page/',car.mypage, name='my_page'),
 ]

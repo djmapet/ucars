@@ -26,3 +26,6 @@ def shop_cars(request, shop_id):
         'cars' : cars,
     }
     return render(request, 'shop_cars.html', context)
+
+def shop_list(request,):
+    return render(request,'shop_list.html')
