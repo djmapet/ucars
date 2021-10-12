@@ -1,9 +1,10 @@
 <form action="{% url 'search' %}" method="post" xmlns="http://www.w3.org/1999/html">
     <a href="">Top Page</a>
-    <a href="/maker_list">Maker List</a>
-    <a href="/edit">Cars Edit</a>
-    <a href="/my_page">My Page</a>
-    <a href="/shop_list">Shop</a>
+    <li><a href="/maker_list">Maker List</a></li>
+    <li><a href="/shop_list">Shop</a></li>
+    <li><a href="/my_page">My Page</a></li><br>
+    <a href="/edit">管理者画面</a>
+
 
     {% csrf_token %}
     {% if carmodel_result %}
