@@ -8,6 +8,7 @@ from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
 from .models import Manufacturer, CarModel, Car, Shop, Pref
 from django.contrib import admin
+from .models import Image
 import datetime
 
 class CarResource(ModelResource):
@@ -117,3 +118,4 @@ admin.site.register(Car, CarAdmin)
 admin.site.register(Manufacturer, ManufacturerAdmin)
 admin.site.register(CarModel, CarModelAdmin)
 admin.site.register(Shop, ShopAdmin)
+admin.site.register(Image)

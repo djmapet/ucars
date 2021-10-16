@@ -114,6 +114,8 @@ class Car(models.Model):
     mileage = models.PositiveIntegerField('mileage', default=0)
     latest_inspection_date = models.DateField('LastInspectionDate', null=True)
     price = models.PositiveIntegerField('price', default=0)
+    picture = models.ImageField(upload_to='images/')
+    title = models.CharField(max_length=200)
 
     def get_color(self):
         return self.get_color_display()
@@ -130,6 +132,8 @@ class Car(models.Model):
     def get_plate_category(self):
         return self.get_plate_category_display()
 
+    def __str__(self):
+        return self.title
 
 class CarImage(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)

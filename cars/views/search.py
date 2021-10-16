@@ -10,6 +10,7 @@ def top(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
+
             selected_carmodel = form.cleaned_data['carmodel']
             selected_body_type = form.cleaned_data['body_type']
             selected_color = form.cleaned_data['color']

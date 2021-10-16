@@ -5,7 +5,7 @@ from cars.models import Car, Manufacturer, CarModel
 
 class SearchForm(forms.Form):
 
-    fields = {'carmodel', 'color', 'gear', 'body_type', 'latest_inspection_date', 'mileage', 'price'}
+    fields = {'carmodel', 'color', 'gear', 'body_type', 'latest_inspection_date', 'mileage', 'price',}
     labels = {
         'carmodel' : '車の名前',
         'color' :  '車の色',
