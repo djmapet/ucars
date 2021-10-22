@@ -1,0 +1,8 @@
+.carmodel{
+    display: flex;
+    class: form-check-inline
+}
+
+.list {
+    text-align :center;
+}

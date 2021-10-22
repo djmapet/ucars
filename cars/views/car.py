@@ -1,8 +1,13 @@
 from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from cars.forms import NewCarForm
+from cars.forms import NewCarForm, SearchForm
 from django.shortcuts import redirect
+from urllib import parse
+from django import template
+from django.shortcuts import resolve_url
+
+register = template.Library()
 
 
 # Create your views here.
@@ -113,4 +118,26 @@ def edit(request,car_id=None):
 
     return render(request, 'edit.html', context)
 
+def searchform(request):
+    form=SearchForm()
+    context = {'form':form,}
+    return render(request,'search.html',context)
+
+
+def mypage(request):
+    return render(request,'my_page.html')
+
+def get_return_link(request):
+    top_page = resolve_url('search:top')  # 最新の日記一覧
+    referer = request.environ.get('HTTP_REFERER')  # これが、前ページのURL
+
+    # URL直接入力やお気に入りアクセスのときはリファラがないので、トップぺージに戻す
+    if referer:
+
+        # リファラがある場合、前回ページが自分のサイト内であれば、そこに戻す。
+        parse_result = parse.urlparse(referer)
+        if request.get_host() == parse_result.netloc:
+            return referer
+
+    return top_page
 

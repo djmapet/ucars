@@ -7,6 +7,7 @@ from import_export.formats import base_formats
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
 from .models import Manufacturer, CarModel, Car, Shop, Pref
+from django.contrib import admin
 import datetime
 
 class CarResource(ModelResource):

@@ -22,9 +22,18 @@ class CarModel(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def get_carmodel_choices(cls):
+        models = CarModel.objects.all()
+        choices = list()
+        for model in models:
+            choices.append((model.id, model.name))
+        return choices
+
 
 class Car(models.Model):
-    carmodel = models.ForeignKey(CarModel, on_delete=models.CASCADE)
+
+    carmodel = models.ForeignKey(CarModel, on_delete=models.CASCADE, null=False)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True)
 
     COLOR_UNKNOWN = 0

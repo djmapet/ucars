@@ -1,0 +1,6 @@
+<p>Shop List</p>
+<ul>
+    {% for shop in shops %}
+    <li><a href="/shop/{{ shop.id }}">{{ shop.shopmodel.name }}</a></li>
+    {% endfor %}
+</ul>

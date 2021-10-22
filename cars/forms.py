@@ -3,22 +3,49 @@ import copy
 from datetime import datetime,timedelta
 from cars.models import Car, Manufacturer, CarModel
 
-class SearchForm(forms.ModelForm):
-    class Meta:
-        model = Car
-        fields = {'carmodel', 'body_type', 'gear', 'color', 'mileage', 'latest_inspection_date', 'price'}
+class SearchForm(forms.Form):
 
-    def clean_carmodel(self):
-        carmodel = self.cleaned_data.get('carmodel')
-        return carmodel
+    fields = {'carmodel', 'color', 'gear', 'body_type', 'latest_inspection_date', 'mileage', 'price'}
+    labels = {
+        'carmodel' : '車の名前',
+        'color' :  '車の色',
+        'gear' : '車のギア',
+        'body_type' : '車種',
+        'latest_inspection_date' : '車検日',
+        'mileage' : '走行距離',
+        'price' : '価格',
+    }
 
+    carmodel = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-inline'}),
+        choices=CarModel.get_carmodel_choices(),
+        label='車の名前',
+    )
+    Car.COLOR_CHOICES.insert(0, (-1, '未設定'))
+    color = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        choices=Car.COLOR_CHOICES,
+        label='車の色',
+    )
+    Car.GEAR_CHOICES.insert(0, (-1, '未設定'))
+    gear = forms.ChoiceField(
+        choices=Car.GEAR_CHOICES,
+        required=False,
+        label='車のギア',
+    )
+    Car.BODY_TYPE_CHOICES.insert(0, (0, '未設定'))
+    body_type = forms.ChoiceField(
+        choices=Car.BODY_TYPE_CHOICES,
+        required=False,
+        label='車種',
+    )
+    mileage = forms.IntegerField(required=False,label='走行距離')
+    latest_inspection_date = forms.DateField(required=False,label='車検日')
+    price = forms.IntegerField(required=False,label='価格')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['carmodel'].required = False
-        self.fields['latest_inspection_date'].required = False
-        self.fields['mileage'].required = False
-        self.fields['price'].required = False
-
 
 
 class NewCarForm(forms.ModelForm):
