@@ -134,3 +134,7 @@ class Car(models.Model):
 class CarImage(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     picture = models.URLField()
+    caption = models.TextField('説明')
+
+    def __str__(self):
+        return self.caption.text[:50]
