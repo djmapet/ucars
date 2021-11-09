@@ -122,3 +122,24 @@ def searchform(request):
 def mypage(request):
     return render(request,'my_page.html')
 
+
+def get_img(request):
+    if request.method == "POST":
+        res, file_name =save(request.FILES["image_file"])
+        res = request.build_absolute_uri(res)
+
+    else:
+        return HttpResponse("this is post page!")
+    #retは画像情報の意味
+    ret = {"url": res}
+    print("画像の登録に成功しました")
+
+    try:
+        raise Exception("画像の登録に失敗しました")
+    except Exception as e:
+        print(e)
+
+    def save(data):
+        file_name = default_storage.save(data.name, data)
+        return default_storage.url(file_name), data.name
+
