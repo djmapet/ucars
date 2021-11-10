@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import car, shop , search
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('car/<int:car_id>', car.detail),
@@ -14,4 +16,8 @@ urlpatterns = [
     path('shop_list',shop.shop_list),
     path('shop_info/<int:shop_id>',shop.shop_info),
     path('my_page/',car.mypage, name='my_page'),
+    #path('', views.get_img, name="img_get"),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
