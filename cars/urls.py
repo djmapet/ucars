@@ -17,6 +17,7 @@ urlpatterns = [
     path('shop_info/<int:shop_id>',shop.shop_info),
     path('my_page/',car.mypage, name='my_page'),
     #path('', views.get_img, name="img_get"),
+    path('upload/',car.get_img,name='upload'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

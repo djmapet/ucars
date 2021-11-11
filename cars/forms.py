@@ -111,3 +111,9 @@ class NewCarForm(forms.ModelForm):
         if latest_inspection_date > datetime.date(years_late):
             raise forms.ValidationError('車検日を確認してください')
         return latest_inspection_date
+
+class UploadImage(forms.Form):
+    class Meta:
+        picture = forms.URLField()
+
+

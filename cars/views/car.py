@@ -3,6 +3,9 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from cars.forms import NewCarForm, SearchForm
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.core.files.storage import default_storage
 
 
 # Create your views here.
@@ -124,6 +127,9 @@ def mypage(request):
 
 
 def get_img(request):
+    form = UploadImage()
+    return render(request, "upload.html", {"form": form})
+
     if request.method == "POST":
         res, file_name =save(request.FILES["image_file"])
         res = request.build_absolute_uri(res)
