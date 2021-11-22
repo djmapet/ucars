@@ -6,7 +6,7 @@ from import_export.admin import ImportMixin
 from import_export.formats import base_formats
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
-from .models import Manufacturer, CarModel, Car, Shop, Pref
+from .models import Manufacturer, CarModel, Car, Shop, Pref, CarImage
 from django.contrib import admin
 import datetime
 
@@ -113,7 +113,23 @@ class CarModelAdmin(ImportMixin, admin.ModelAdmin):
     formats = [base_formats.TSV]
 
 
+class CarImageResource(ModelResource):
+    picture = Field(attribute='picture', column_name='picture')
+    caption = Field(attribute='caption', column_name='caption')
+    search_fields = ['name']
+
+    class Meta:
+        model = CarImage
+        import_order = ('picture','caption','id')
+
+
+
+class CarImageAdmin(ImportMixin, admin.ModelAdmin):
+    list_display = ['picture', 'caption','id']
+    resource_class = CarImageResource
+
 admin.site.register(Car, CarAdmin)
 admin.site.register(Manufacturer, ManufacturerAdmin)
 admin.site.register(CarModel, CarModelAdmin)
 admin.site.register(Shop, ShopAdmin)
+admin.site.register(CarImage,CarImageAdmin)

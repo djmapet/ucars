@@ -127,8 +127,6 @@ def mypage(request):
 
 
 def get_img(request):
-    form = UploadImage()
-    return render(request, "upload.html", {"form": form})
 
     if request.method == "POST":
         res, file_name =save(request.FILES["image_file"])
@@ -145,7 +143,7 @@ def get_img(request):
     except Exception as e:
         print(e)
 
-    def save(data):
-        file_name = default_storage.save(data.name, data)
-        return default_storage.url(file_name), data.name
+def save(data):
+    file_name = default_storage.save(data.name, data)
+    return default_storage.url(file_name), data.name
 
