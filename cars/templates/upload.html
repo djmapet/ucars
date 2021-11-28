@@ -5,7 +5,12 @@
     <title>up_load</title>
 </head>
 <body>
-    {% csrf_token %}
-    {{ form }}
+  <h1>ファイルアップロード</h1>
+  <form method="POST"enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">アップロード</button>
+  </form>
+
 </body>
 </html>

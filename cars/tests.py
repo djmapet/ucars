@@ -145,3 +145,5 @@ class CarTests(TestCase):
         unknown_cars = Car.objects.filter(gear=Car.GEAR_UNKNOWN)
         self.assertEqual(len(unknown_cars), 1)
         self.assertEqual(unknown_cars[0], car3)
+
+

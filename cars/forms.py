@@ -112,8 +112,7 @@ class NewCarForm(forms.ModelForm):
             raise forms.ValidationError('車検日を確認してください')
         return latest_inspection_date
 
-class UploadImage(forms.Form):
-    class Meta:
-        picture = forms.URLField()
-
+class FileFieldForm(forms.Form):
+    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    title = forms.CharField(max_length=50)
 

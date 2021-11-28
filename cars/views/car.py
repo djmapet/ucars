@@ -1,11 +1,13 @@
 from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from cars.forms import NewCarForm, SearchForm
+from cars.forms import NewCarForm, SearchForm,FileFieldForm
+from django.views.generic.edit import FormView
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.files.storage import default_storage
+from cars.forms import FileFieldForm
 
 
 # Create your views here.
@@ -126,24 +128,17 @@ def mypage(request):
     return render(request,'my_page.html')
 
 
-def get_img(request):
-
-    if request.method == "POST":
-        res, file_name =save(request.FILES["image_file"])
-        res = request.build_absolute_uri(res)
-
-    else:
-        return HttpResponse("this is post page!")
-    #retは画像情報の意味
-    ret = {"url": res}
-    print("画像の登録に成功しました")
-
-    try:
-        raise Exception("画像の登録に失敗しました")
-    except Exception as e:
-        print(e)
-
-def save(data):
-    file_name = default_storage.save(data.name, data)
-    return default_storage.url(file_name), data.name
+class FileFieldFormView(FormView):
+    form_class = FileFieldForm
+    template_name = 'upload.html'
+    success_url = '...'
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('file_field')
+        if form.is_valid():
+            for f in files:
+                return  self.form_valid(form)
+            else:
+                return self.form_invalid(form)
 
