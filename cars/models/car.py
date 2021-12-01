@@ -138,3 +138,6 @@ class CarImage(models.Model):
 
     def __str__(self):
         return self.caption.text[:50]
+
+    def __str__(self):
+        return self.name

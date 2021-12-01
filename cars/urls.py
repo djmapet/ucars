@@ -1,4 +1,6 @@
 from django.urls import path
+from django.contrib import admin
+from django.conf import settings
 
 import views.car
 from .views import car, shop , search
@@ -18,8 +20,11 @@ urlpatterns = [
     path('shop_list',shop.shop_list),
     path('shop_info/<int:shop_id>',shop.shop_info),
     path('my_page/',car.mypage, name='my_page'),
-    path('upload/',views.car.FileFieldFormView,name='upload'),
+    path('upload/',car.upload_file,name='upload'),
+    path('upload/file/name.txt',car.upload_file,name='upload_file'),
+    path('success/url/',car.upload_file,name='success_file'),
+    path('admin/', admin.site.urls),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
-#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

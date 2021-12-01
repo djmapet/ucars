@@ -1,14 +1,13 @@
 from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from cars.forms import NewCarForm, SearchForm,FileFieldForm
+from cars.forms import NewCarForm, SearchForm,UploadFileForm
 from django.views.generic.edit import FormView
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.files.storage import default_storage
-from cars.forms import FileFieldForm
-
+from cars.forms import UploadFileForm
 
 # Create your views here.
 def index(request):
@@ -127,18 +126,18 @@ def searchform(request):
 def mypage(request):
     return render(request,'my_page.html')
 
-
-class FileFieldFormView(FormView):
-    form_class = FileFieldForm
-    template_name = 'upload.html'
-    success_url = '...'
-    def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        files = request.FILES.getlist('file_field')
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid():
-            for f in files:
-                return  self.form_valid(form)
-            else:
-                return self.form_invalid(form)
+            handle_uploaded_file(request.FILES['file']) #おかしい
+            return HttpResponse('success/url/')
+    else:
+        form = UploadFileForm()
+    return render(request, 'upload.html',{'form':form})
+
+def handle_uploaded_file(f):
+    with open('media/image/name.txt', 'wb+') as destination: #合わない
+        for chunk in f.chunks():
+            destination.write(chunk)
 
