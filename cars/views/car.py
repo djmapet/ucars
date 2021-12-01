@@ -137,7 +137,7 @@ def upload_file(request):
     return render(request, 'upload.html',{'form':form})
 
 def handle_uploaded_file(f):
-    with open('media/image/name.txt', 'wb+') as destination: #合わない
+    with open('sample.jpg', 'wb+') as destination: #合わない
         for chunk in f.chunks():
             destination.write(chunk)
 

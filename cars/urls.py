@@ -2,7 +2,6 @@ from django.urls import path
 from django.contrib import admin
 from django.conf import settings
 
-import views.car
 from .views import car, shop , search
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
