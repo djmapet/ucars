@@ -149,3 +149,6 @@ DEBUG_TOOLBAR_PANELS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+CAR_IMG_ROOT = MEDIA_URL+"images/"
+CAR_IMG_URL = "media/images/"
+

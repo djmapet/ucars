@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
@@ -129,19 +131,23 @@ def mypage(request):
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
+        file_name = "sample.jpg"
+        img_path = settings.CAR_IMG_URL+file_name    # temporary
+        img_url = settings.CAR_IMG_ROOT+file_name
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file']) #おかしい
+            handle_uploaded_file(request.FILES['file'], img_path) #おかしい
             #return HttpResponse('success/url/')
             context = {
-                'img_path': '/media/images/sample.jpg',
+                'img_path': img_path,
+                'img_url': img_url,
             }
             return render(request,'uploaded.html', context)
     else:
         form = UploadFileForm()
     return render(request, 'upload.html',{'form':form})
 
-def handle_uploaded_file(f):
-    with open('media/images/sample.jpg', 'wb+') as destination: #合わない
+def handle_uploaded_file(f, img_path):
+    with open(img_path, 'wb+') as destination: #合わない
         for chunk in f.chunks():
             destination.write(chunk)
 
