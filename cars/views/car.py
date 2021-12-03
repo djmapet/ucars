@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.files.storage import default_storage
 from cars.forms import UploadFileForm
+import time
 
 # Create your views here.
 def index(request):
@@ -131,11 +132,12 @@ def mypage(request):
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
-        file_name = "sample.jpg"
-        img_path = settings.CAR_IMG_URL+file_name    # temporary
+        ja = time.time()
+        file_name = str(ja)+".jpg"
+        img_path = settings.CAR_IMG_URL+file_name   # temporary
         img_url = settings.CAR_IMG_ROOT+file_name
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'], img_path) #おかしい
+            handle_uploaded_file(request.FILES['file'], img_path)
             #return HttpResponse('success/url/')
             context = {
                 'img_path': img_path,
