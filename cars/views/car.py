@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from cars.models import Car, Manufacturer, CarModel,CarImage
+from cars.models import Car, Manufacturer, CarModel
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from cars.forms import NewCarForm, SearchForm,UploadFileForm
@@ -129,14 +129,15 @@ def searchform(request):
 def mypage(request):
     return render(request,'my_page.html')
 
-def upload_file(request):
+def upload_file(request, car_id):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
-        car_id = CarImage.car
-        name = "%d-%s.jpg" % (car_id, datetime.now().strftime("%Y%m%d%H%I%S"))
-        img_path = settings.CAR_IMG_URL+name  # temporary
-        img_url = settings.CAR_IMG_ROOT+name
         if form.is_valid():
+            car_id = form.cleaned_data['car_id']
+            name = "%d-%s.jpg" % (car_id, datetime.now().strftime("%Y%m%d%H%I%S"))
+            img_path = settings.CAR_IMG_URL+name  # temporary
+            img_url = settings.CAR_IMG_ROOT+name
+
             handle_uploaded_file(request.FILES['file'], img_path)
             #return HttpResponse('success/url/')
             context = {
@@ -145,7 +146,7 @@ def upload_file(request):
             }
             return render(request,'uploaded.html', context)
     else:
-        form = UploadFileForm()
+        form = UploadFileForm(initial={'car_id':car_id})
     return render(request, 'upload.html',{'form':form})
 
 def handle_uploaded_file(f, img_path):

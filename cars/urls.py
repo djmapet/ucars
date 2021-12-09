@@ -19,7 +19,7 @@ urlpatterns = [
     path('shop_list',shop.shop_list),
     path('shop_info/<int:shop_id>',shop.shop_info),
     path('my_page/',car.mypage, name='my_page'),
-    path('upload/',car.upload_file,name='upload'),
+    path('upload/<int:car_id>',car.upload_file,name='upload'),
     path('upload/file/name.txt',car.upload_file,name='upload_file'),
     path('success/url/',car.upload_file,name='success_file'),
     path('admin/', admin.site.urls),
