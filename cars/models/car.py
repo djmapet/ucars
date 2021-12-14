@@ -136,6 +136,11 @@ class CarImage(models.Model):
     picture = models.URLField()
     caption = models.TextField('説明')
 
+    #追加
+    car_id = models.ForeignKey(Car,on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    url = models.URLField()
+
     def __str__(self):
         return self.caption.text[:50]
 

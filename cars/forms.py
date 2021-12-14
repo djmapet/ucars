@@ -1,7 +1,7 @@
 from django import forms
 import copy
 from datetime import datetime,timedelta
-from cars.models import Car, Manufacturer, CarModel
+from cars.models import Car, Manufacturer, CarModel,CarImage
 
 class SearchForm(forms.Form):
 
@@ -121,6 +121,7 @@ class UploadFileForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['car_id'].widget = forms.HiddenInput()
 
+    model = CarModel
     title = forms.CharField(max_length=50)
     file = forms.FileField()
     car_id = forms.IntegerField()

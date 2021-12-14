@@ -7,7 +7,7 @@ from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('car/<int:car_id>', car.detail),
+    path('car/<int:car_id>', car.detail), #画像のアップロードを追加したい
     path('maker/<int:manufacturer_id>', car.maker_cars,name='maker'),
     path('shop/cars/<int:shop_id>', shop.shop_cars),
     path('shop/<int:shop_id>', shop.shop_info),
