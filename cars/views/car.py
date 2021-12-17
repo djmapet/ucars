@@ -130,22 +130,41 @@ def mypage(request):
     return render(request,'my_page.html')
 
 def upload_file(request, car_id):
+    #追加
+    if car_id:
+        try:
+            car = Car.objects.get(pk=car_id)
+
+        except Car.DoesNotExist:
+            raise Http404("Car does not exist")
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid():
-            car_id = form.cleaned_data['car_id']
-            car_id.save()
+            try:
+                car = form.save(commit=False)
+                car.save
+                if car_id:
+                    car_id = form.cleaned_data['car_id']
+                    name = "%d-%s.jpg" % (car_id, datetime.now().strftime("%Y%m%d%H%I%S"))
+                    img_path = settings.CAR_IMG_URL + name  # temporary
+                    img_url = settings.CAR_IMG_ROOT + name
 
-            name = "%d-%s.jpg" % (car_id, datetime.now().strftime("%Y%m%d%H%I%S"))
-            img_path = settings.CAR_IMG_URL+name  # temporary
-            img_url = settings.CAR_IMG_ROOT+name
+                    handle_uploaded_file(request.FILES['file'], img_path)
 
-            handle_uploaded_file(request.FILES['file'], img_path)
-            context = {
-                'img_path': img_path,
-                'img_url': img_url,
-            }
-            return render(request,'uploaded.html', context)
+                    context = {
+                        'img_path': img_path,
+                        'img_url': img_url,
+                    }
+                    return render(request, 'uploaded.html', context)
+                else:
+                    context = {
+                        'img_path': img_path,
+                        'img_url': img_url,
+                    }
+                    return render(request, 'uploaded.html', context)
+            except Car.DoesNotExist:
+                raise Http404("maker does not exist")
+
     else:
         form = UploadFileForm(initial={'car_id':car_id})
     return render(request, 'upload.html',{'form':form})

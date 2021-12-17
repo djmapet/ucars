@@ -116,7 +116,6 @@ class CarModelAdmin(ImportMixin, admin.ModelAdmin):
 class CarImageResource(ModelResource):
     picture = Field(attribute='picture', column_name='picture')
     caption = Field(attribute='caption', column_name='caption')
-    search_fields = ['name']
 
     class Meta:
         model = CarImage
@@ -125,7 +124,7 @@ class CarImageResource(ModelResource):
 
 
 class CarImageAdmin(ImportMixin, admin.ModelAdmin):
-    list_display = ['picture', 'caption','id']
+    list_display = ['picture', 'caption']
     resource_class = CarImageResource
 
 admin.site.register(Car, CarAdmin)
