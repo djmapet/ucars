@@ -19,6 +19,8 @@ def index(request):
 def detail(request, car_id=1):
     try:
         car = Car.objects.get(pk=car_id)
+
+        car_imgs = CarImage.objects.filter(car=car)
         color = car.get_color()
         mileage = car.mileage
         carmodel=car.carmodel
@@ -44,6 +46,7 @@ def detail(request, car_id=1):
         'LastInspectionDate': latest_inspection_date,
         'drive' : drive,
         'model_year' : model_year,
+        'car_imgs' : car_imgs
         }
     return render(request, 'car_detail.html', context)
 
@@ -130,41 +133,37 @@ def mypage(request):
     return render(request,'my_page.html')
 
 def upload_file(request, car_id):
-    #追加
-    if car_id:
-        try:
-            car = Car.objects.get(pk=car_id)
-
-        except Car.DoesNotExist:
-            raise Http404("Car does not exist")
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid():
+            car_id = form.cleaned_data['car_id']
+            caption = form.cleaned_data['caption']
             try:
-                car = form.save(commit=False)
-                car.save
-                if car_id:
-                    car_id = form.cleaned_data['car_id']
-                    name = "%d-%s.jpg" % (car_id, datetime.now().strftime("%Y%m%d%H%I%S"))
-                    img_path = settings.CAR_IMG_URL + name  # temporary
-                    img_url = settings.CAR_IMG_ROOT + name
-
-                    handle_uploaded_file(request.FILES['file'], img_path)
-
-                    context = {
-                        'img_path': img_path,
-                        'img_url': img_url,
-                    }
-                    return render(request, 'uploaded.html', context)
-                else:
-                    context = {
-                        'img_path': img_path,
-                        'img_url': img_url,
-                    }
-                    return render(request, 'uploaded.html', context)
+                car = Car.objects.get(pk=car_id)
             except Car.DoesNotExist:
-                raise Http404("maker does not exist")
+                raise Http404("Car does not exist")
+            name = "%d-%s.jpg" % (car_id, datetime.now().strftime("%Y%m%d%H%I%S"))
+            img_path = settings.CAR_IMG_URL + name  # temporary
+            img_url = settings.CAR_IMG_ROOT + name
 
+            handle_uploaded_file(request.FILES['file'], img_path)
+
+            try:
+                car_img = CarImage.objects.create(
+                    car = car,
+                    picture= img_url,
+                    caption= caption
+                )
+                car_img.save()
+            except CarImage.DoesNotExist:
+                raise Http404("CarImage save error")
+
+            context = {
+                'img_path': img_path,
+                'img_url': img_url,
+                'caption': caption,
+            }
+            return render(request, 'uploaded.html', context)
     else:
         form = UploadFileForm(initial={'car_id':car_id})
     return render(request, 'upload.html',{'form':form})

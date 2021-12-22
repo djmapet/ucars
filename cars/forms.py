@@ -115,14 +115,14 @@ class NewCarForm(forms.ModelForm):
 class UploadFileForm(forms.ModelForm):
     class Meta:
         model = CarModel
-        fields = ['title','file','car_id']
+        fields = ['caption','file','car_id']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['car_id'].widget = forms.HiddenInput()
 
     model = CarModel
-    title = forms.CharField(max_length=50)
+    caption = forms.CharField(max_length=50)
     file = forms.FileField()
     car_id = forms.IntegerField()
 

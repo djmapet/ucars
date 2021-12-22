@@ -8,3 +8,7 @@
 年式 : {{model_year}}<br>
 駆動方式 : {{drive}}<br>
 車検満了日 : {{ LastInspectionDate }}<br>
+{% for img in car_imgs %}
+{{ img.caption }}<br>
+    <img src="http://localhost:8000{{ img.picture }}" width="128"><br>
+{% endfor %}
