@@ -1,8 +1,72 @@
-.carmodel{
-    display: flex;
-    class: form-check-inline
+.search-cars {
+    font-size: 15pt;
 }
 
 .list {
     text-align :center;
+}
+
+li, h2 {
+
+    color:#FF0000;
+}
+
+
+.page-header {
+    background-color: black ;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #808000;
+    font-size: 40pt;
+    text-decoration: none;
+    font-family: 'UnifrakturMaguntia';
+
+}
+
+body{
+    background-color: #CCFFFF;
+}
+.menu-list{
+   font-size: 56pt;
+   padding: 20px 20px 50px 50px;
+   text-align: center;
+   font-size:x-large;
+}
+.menu-list a {
+    padding: 1em;
+    width: 100%;
+    background-color:blue;
+    margin-top: 0;
+    border-radius: 20px;
+    width: 80%;
+    margin: 0px 20px 0px 20px;
+}
+
+.search h2 {
+    text-align: center;
+}
+
+.footer {
+    width: 100%;
+    height: 120px;
+    text-align: center;
+    padding: 50px 0;
+    position: absolute;
+    /* Set the fixed height of the footer here */
+    background-color: black;
+    }
+
+body > .container {
+    padding: 60px 15px 0;
+    }
+.container .text-muted {
+    margin: 20px 0;
+    }
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
 }

@@ -1,45 +1,63 @@
-<form action="{% url 'search' %}" method="post" xmlns="http://www.w3.org/1999/html">
-    <a href="">Top Page</a>
-    <a href="/maker_list">Maker List</a>
-    <a href="/edit">Cars Edit</a>
-    <a href="/my_page">My Page</a>
-    <a href="/shop_list">Shop</a>
+{% load static %}
+<html>
+    <head>
+        <title>DjangoUsedCarSite</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'cars/search.css' %}">
+        <link href="//fonts.googleapis.com/css?family=UnifrakturMaguntia&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    </head>
+    <body>
 
-    {% csrf_token %}
-    {% if carmodel_result %}
-        {% for car in carmodel_result %}
-            <li>Car ID:{{ car.id }}</li>
-            <li>名前:{{ car.carmodel.name }}</li> <li>メーカー:{{car.carmodel.manufacturer.name}}</li>
-            <li>価格:{{car.price}}円 </li> <li>車種:{{car.get_body_type}} ギア:{{ car.get_gear }} 走行距離:{{ car.mileage }}km 車の色:{{ car.get_color }}  車検日:{{car.latest_inspection_date}}</li><br>
-        {% endfor %}
-    {% endif %}
+        <form action="{% url 'search' %}" method="post" xmlns="http://www.w3.org/1999/html">
+            <div class="page-header"><h1><a href="/">Django UsedCar Site</a></h1>
+            </div>
 
+            <div class="menu-list">
+                <a href="">Top Page</a>
+                <a href="/maker_list">Maker List</a>
+                <a href="/edit">Cars Edit</a>
+                <a href="/my_page">My Page</a>
+                <a href="/shop_list">Shop</a>
+            </div>
 
-    <h2>検索</h2>
+            {% csrf_token %}
+            {% if carmodel_result %}
+                {% for car in carmodel_result %}
+                    <li>Car ID:{{ car.id }}</li>
+                    <li>名前:{{ car.carmodel.name }}</li> <li>メーカー:{{car.carmodel.manufacturer.name}}</li>
+                    <li>価格:{{car.price}}円 </li> <li>車種:{{car.get_body_type}} ギア:{{ car.get_gear }} 走行距離:{{ car.mileage }}km 車の色:{{ car.get_color }}  車検日:{{car.latest_inspection_date}}</li><br>
+                {% endfor %}
+            {% endif %}
 
-    {% for field in form %}
-        <div>
-                {% if field.label == "車の名前" %}
-                    {{ field.label_tag }}
-                    {% for n in field %}
-                        {{ n.tag }}{{ n.data.label }}
-                    {% endfor %}
-                {% elif field.label == "車の色" %}
-                    {{ field.label_tag }}
-                    {% for n in field %}
-                        {{ n.tag }}{{ n.data.label }}
-                    {% endfor %}
-                {% else %}
-                {{ field.label_tag }}{{ field }}
-                {% endif %}
-        </div>
-    {% endfor %}
+            <div class="search"><h2>検索</h2></div>
 
 
+            {% for field in form %}
+                <div class="search-cars">
+                        {% if field.label == "車の名前" %}
+                            {{ field.label_tag }}
+                            {% for n in field %}
+                                {{ n.tag }}{{ n.data.label }}
+                            {% endfor %}
+                        {% elif field.label == "車の色" %}
+                            {{ field.label_tag }}
+                            {% for n in field %}
+                                {{ n.tag }}{{ n.data.label }}
+                            {% endfor %}
+                        {% else %}
+                        {{ field.label_tag }}{{ field }}
+                        {% endif %}
+                </div>
+            {% endfor %}
 
+            <input type="submit" value="検索">
+        </form>
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">Place sticky footer content here.</p>
+            </div>
+        </footer>
+    </body>
 
-
-
-
-<input type="submit" value="検索">
-</form>
+</html>
